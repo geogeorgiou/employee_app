@@ -9,4 +9,5 @@ public interface LoginUserRepository extends JpaRepository<LoginUser, String> {
 
     //Using Spring JPA functionality to get DB Data
     Optional<LoginUser> findByEmail(String email);
+
 }

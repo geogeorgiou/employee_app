@@ -48,7 +48,7 @@ public class HomeController {
         UserModel userModel = loggedUserService.findByEmail(loginUser.getEmail());
 
         model.addAttribute(LOGGED_USER_ATTR, userModel);
-        model.addAttribute(LOGGED_USER_NAME, loginUser.getFirstName());
+        model.addAttribute(LOGGED_USER_NAME, loginUser.getEMP_Name());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
 
         return "pages/userHome";
@@ -64,7 +64,7 @@ public class HomeController {
         userForm.setRole(RoleType.USER);    //since we only have USER
 
         model.addAttribute(LOGGED_USER_ATTR, userForm);
-        model.addAttribute(LOGGED_USER_NAME, userForm.getFirstName());
+        model.addAttribute(LOGGED_USER_NAME, userForm.getName());
         model.addAttribute(LOGGED_USER_ROLE, userForm.getRole().name());
 
 

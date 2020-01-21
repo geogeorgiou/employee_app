@@ -57,7 +57,7 @@ public class RegisterController {
             userForm.setRole(RoleType.USER);
 
             model.addAttribute(LOGGED_USER_ATTR, userForm);
-            model.addAttribute(LOGGED_USER_NAME, userForm.getFirstName());
+            model.addAttribute(LOGGED_USER_NAME, userForm.getName());
             model.addAttribute(LOGGED_USER_ROLE, userForm.getRole().name());
 
             //Creates user

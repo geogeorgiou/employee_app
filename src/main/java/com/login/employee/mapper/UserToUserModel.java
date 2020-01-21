@@ -15,11 +15,13 @@ public class UserToUserModel {
     public UserModel mapToUserModel(LoginUser user){
         UserModel userModel = new UserModel();
 
+        userModel.setId(user.getEMP_ID());
+        userModel.setName(user.getEMP_Name());
+        userModel.setDateOfHire(user.getEMP_Date_Of_Hire().toString()); //maybe needs formatter
+        userModel.setSupervisor(user.getEMP_Supervisor());
+
+        //assign login related variables
         userModel.setEmail(user.getEmail());
-        userModel.setCompany(user.getCompany());
-        userModel.setFirstName(user.getFirstName());
-        userModel.setLastName(user.getLastName());
-        userModel.setPhoneNumber(user.getPhoneNumber());
         userModel.setPassword(user.getPassword());
         userModel.setRole(user.getRole() != null ? user.getRole() : RoleType.USER); //USER IS THE DEFAULT OPTION
 
