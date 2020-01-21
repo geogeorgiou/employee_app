@@ -10,4 +10,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     //Using Spring JPA functionality to get DB Data
     Optional<Employee> findByEmail(String email);
 
+    Optional<Employee> findById(String id);
+
 }
