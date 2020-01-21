@@ -1,0 +1,25 @@
+/*styles for <a> link and it's container*/
+/*in login form*/
+
+.register_anchor_container{
+    margin-top: 10px;
+}
+
+.register_anchor{
+    color: gray;
+    text-decoration: none;
+
+    /*necessary to be inline block for <a> to transform*/
+    display: inline-block;
+    transition: all .2s;
+    -webkit-backface-visibility: hidden;
+}
+
+.register_anchor:hover{
+    color: #04116b;
+    cursor: pointer;
+    text-decoration: none;
+    transform: scale(1.2);
+}
+
+/**************************************/
