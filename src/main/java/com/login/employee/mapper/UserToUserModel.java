@@ -1,6 +1,6 @@
 package com.login.employee.mapper;
 
-import com.login.employee.domain.LoginUser;
+import com.login.employee.domain.Employee;
 import com.login.employee.enums.RoleType;
 import com.login.employee.model.UserModel;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ public class UserToUserModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
-    public UserModel mapToUserModel(LoginUser user){
+    public UserModel mapToUserModel(Employee user){
         UserModel userModel = new UserModel();
 
         userModel.setId(user.getEMP_ID());

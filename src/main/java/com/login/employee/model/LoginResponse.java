@@ -1,6 +1,6 @@
 package com.login.employee.model;
 
-import com.login.employee.domain.LoginUser;
+import com.login.employee.domain.Employee;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -11,17 +11,17 @@ import java.util.Collection;
 
 public class LoginResponse extends User {
 
-    private LoginUser loginUser;
+    private Employee loginUser;
 
     public LoginResponse(String username,
                          String password,
                          Collection<? extends GrantedAuthority> authorities,
-                         LoginUser loginUser) {
+                         Employee loginUser) {
         super(username, password, authorities);
         this.loginUser = loginUser;
     }
 
-    public LoginUser getLoginUser() {return loginUser;}
+    public Employee getLoginUser() {return loginUser;}
 
 
 }

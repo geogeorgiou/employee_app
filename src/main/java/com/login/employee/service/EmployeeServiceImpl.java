@@ -1,10 +1,9 @@
 package com.login.employee.service;
 
-import com.login.employee.domain.LoginUser;
-import com.login.employee.exception.DuplicateEmailException;
+import com.login.employee.domain.Employee;
 import com.login.employee.mapper.UserToUserModel;
 import com.login.employee.model.UserModel;
-import com.login.employee.repository.LoginUserRepository;
+import com.login.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LoggedUserServiceImpl implements LoggedUserService {
+public class EmployeeServiceImpl implements EmployeeService {
 
     //UserRepository to retrieve data
     @Autowired
-    private LoginUserRepository userRepo;
+    private EmployeeRepository userRepo;
 
     //mapper to map DB data to Model data
     @Autowired
@@ -35,19 +34,19 @@ public class LoggedUserServiceImpl implements LoggedUserService {
     public UserModel findByEmail(String email){
 
         //needs some exception handling here if exists etc
-        Optional<LoginUser> loginUser = userRepo.findByEmail(email);
-        return mapper.mapToUserModel(loginUser.get());
+        Optional<Employee> employee = userRepo.findByEmail(email);
+        return mapper.mapToUserModel(employee.get());
     }
 
 
     //AUTO GENERATED
     @Override
-    public LoginUser updateUser(UserModel userModel) {
+    public Employee updateUser(UserModel userModel) {
         return null;
     }
 
     @Override
-    public LoginUser createUser(UserModel userModel) {
+    public Employee createUser(UserModel userModel) {
         return null;
     }
 

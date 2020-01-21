@@ -4,7 +4,7 @@ package com.login.employee.controller.user;
 import com.login.employee.enums.RoleType;
 import com.login.employee.exception.DuplicateEmailException;
 import com.login.employee.model.UserModel;
-import com.login.employee.service.LoggedUserService;
+import com.login.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class RegisterController {
     //User Service
 
     @Autowired
-    private LoggedUserService logService;
+    private EmployeeService logService;
 
     //GET /register
 

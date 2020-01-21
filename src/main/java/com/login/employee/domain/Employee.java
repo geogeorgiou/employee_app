@@ -2,7 +2,6 @@ package com.login.employee.domain;
 
 import com.login.employee.enums.RoleType;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,8 +10,8 @@ import java.time.LocalDate;
 //Main Entity of the Web App
 
 @Entity
-@Table(name = "LOGIN_USER")
-public class LoginUser {
+@Table(name = "Employee")
+public class Employee {
 
     //Static variables
 //    private static final int MAX_PHONE_LENGTH = 10;
@@ -47,10 +46,10 @@ public class LoginUser {
     @Column(name = "role", nullable = false)
     private RoleType role;
 
-    public LoginUser() {
+    public Employee() {
     }
 
-    public LoginUser(String EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, String EMP_Supervisor, String email, String password, RoleType role) {
+    public Employee(String EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, String EMP_Supervisor, String email, String password, RoleType role) {
         this.EMP_ID = EMP_ID;
         this.EMP_Name = EMP_Name;
         this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;

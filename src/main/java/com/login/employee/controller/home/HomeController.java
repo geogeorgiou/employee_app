@@ -1,11 +1,11 @@
 package com.login.employee.controller.home;
 
 
-import com.login.employee.domain.LoginUser;
+import com.login.employee.domain.Employee;
 import com.login.employee.enums.RoleType;
 import com.login.employee.model.LoginResponse;
 import com.login.employee.model.UserModel;
-import com.login.employee.service.LoggedUserService;
+import com.login.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +29,7 @@ public class HomeController {
 
     //User Service
     @Autowired
-    private LoggedUserService loggedUserService;
+    private EmployeeService employeeService;
 
     //GET of /user/home
 
@@ -41,11 +41,11 @@ public class HomeController {
         SecurityContext contextHolder = SecurityContextHolder.getContext();
         LoginResponse loginResponse = (LoginResponse) contextHolder.getAuthentication().getPrincipal();
 
-        LoginUser loginUser = loginResponse.getLoginUser();
+        Employee loginUser = loginResponse.getLoginUser();
 
         //Assign variables to model in order to show data on /user/home
 
-        UserModel userModel = loggedUserService.findByEmail(loginUser.getEmail());
+        UserModel userModel = employeeService.findByEmail(loginUser.getEmail());
 
         model.addAttribute(LOGGED_USER_ATTR, userModel);
         model.addAttribute(LOGGED_USER_NAME, loginUser.getEMP_Name());
@@ -69,7 +69,7 @@ public class HomeController {
 
 
         //updates user data
-        loggedUserService.updateUser(userForm);
+        employeeService.updateUser(userForm);
         return "redirect:/user/home";
     }
 
