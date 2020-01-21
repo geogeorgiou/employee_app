@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.login</groupId>
-	<artifactId>webapp</artifactId>
+	<artifactId>employee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>webapp</name>
-	<description>Small Login project for Spring Boot</description>
+	<name>employee</name>
+	<description>Project using Spring Boot to demonstrate CRUD functionality over Employee and associate classes</description>
 
 	<properties>
 		<java.version>11</java.version>
