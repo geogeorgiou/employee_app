@@ -18,7 +18,7 @@ public class UserToUserModel {
         userModel.setId(user.getEMP_ID());
         userModel.setName(user.getEMP_Name());
         userModel.setDateOfHire(user.getEMP_Date_Of_Hire().toString()); //maybe needs formatter
-        userModel.setSupervisor(user.getEMP_Supervisor());
+        userModel.setSupervisor(user.getEMP_Supervisor().getEMP_ID()); //check for nullability
 
         //assign login related variables
         userModel.setEmail(user.getEmail());

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 //Main Entity of the Web App
@@ -19,8 +20,10 @@ public class Employee {
     //User variables
 
     @Id
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "EMPATTR_EMP_ID")
     @Column(name = "EMP_ID",nullable = false)
-    private String EMP_ID;
+    private Employee EMP_ID;
 
     @Column(name = "EMP_Name")
     private String EMP_Name;
@@ -29,8 +32,16 @@ public class Employee {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate EMP_Date_Of_Hire;
 
-    @Column(name = "EMP_Supervisor")
-    private String EMP_Supervisor;
+    @ManyToOne(optional = true, cascade=CascadeType.ALL)
+    @JoinColumn(name="EMP_ID")
+    private Employee EMP_Supervisor;
+
+    @ManyToMany
+    @JoinTable(
+            name = "EmployeeAttribute",
+            joinColumns = @JoinColumn(name = "EMP_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
+    List<Attribute> hasAttr;
 
     //Login Credentials related attributes
 
@@ -49,21 +60,22 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, String EMP_Supervisor, String email, String password, RoleType role) {
+    public Employee(Employee EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, Employee EMP_Supervisor, List<Attribute> hasAttr, String email, String password, RoleType role) {
         this.EMP_ID = EMP_ID;
         this.EMP_Name = EMP_Name;
         this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;
         this.EMP_Supervisor = EMP_Supervisor;
+        this.hasAttr = hasAttr;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public String getEMP_ID() {
+    public Employee getEMP_ID() {
         return EMP_ID;
     }
 
-    public void setEMP_ID(String EMP_ID) {
+    public void setEMP_ID(Employee EMP_ID) {
         this.EMP_ID = EMP_ID;
     }
 
@@ -83,12 +95,20 @@ public class Employee {
         this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;
     }
 
-    public String getEMP_Supervisor() {
+    public Employee getEMP_Supervisor() {
         return EMP_Supervisor;
     }
 
-    public void setEMP_Supervisor(String EMP_Supervisor) {
+    public void setEMP_Supervisor(Employee EMP_Supervisor) {
         this.EMP_Supervisor = EMP_Supervisor;
+    }
+
+    public List<Attribute> getHasAttr() {
+        return hasAttr;
+    }
+
+    public void setHasAttr(List<Attribute> hasAttr) {
+        this.hasAttr = hasAttr;
     }
 
     public String getEmail() {
