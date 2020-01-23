@@ -20,17 +20,13 @@ public class Attribute {
     @Column(name = "ATTR_Value",nullable = false)
     private String ATTR_Value;
 
-    @ManyToMany(mappedBy = "hasAttr")
-    List<Employee> has;
-
     public Attribute() {
     }
 
-    public Attribute(String ATTR_ID, String ATTR_Name, String ATTR_Value, List<Employee> has) {
+    public Attribute(String ATTR_ID, String ATTR_Name, String ATTR_Value) {
         this.ATTR_ID = ATTR_ID;
         this.ATTR_Name = ATTR_Name;
         this.ATTR_Value = ATTR_Value;
-        this.has = has;
     }
 
     public String getATTR_ID() {
@@ -57,11 +53,5 @@ public class Attribute {
         this.ATTR_Value = ATTR_Value;
     }
 
-    public List<Employee> getHas() {
-        return has;
-    }
 
-    public void setHas(List<Employee> has) {
-        this.has = has;
-    }
 }
