@@ -21,12 +21,12 @@ public class Attribute {
     private String ATTR_Value;
 
     @ManyToMany(mappedBy = "hasAttr")
-    List<Attribute> has;
+    List<Employee> has;
 
     public Attribute() {
     }
 
-    public Attribute(String ATTR_ID, String ATTR_Name, String ATTR_Value, List<Attribute> has) {
+    public Attribute(String ATTR_ID, String ATTR_Name, String ATTR_Value, List<Employee> has) {
         this.ATTR_ID = ATTR_ID;
         this.ATTR_Name = ATTR_Name;
         this.ATTR_Value = ATTR_Value;
@@ -57,11 +57,11 @@ public class Attribute {
         this.ATTR_Value = ATTR_Value;
     }
 
-    public List<Attribute> getHas() {
+    public List<Employee> getHas() {
         return has;
     }
 
-    public void setHas(List<Attribute> has) {
+    public void setHas(List<Employee> has) {
         this.has = has;
     }
 }

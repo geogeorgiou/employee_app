@@ -20,10 +20,8 @@ public class Employee {
     //User variables
 
     @Id
-    @OneToOne(optional = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "EMPATTR_EMP_ID")
     @Column(name = "EMP_ID",nullable = false)
-    private Employee EMP_ID;
+    private String EMP_ID;
 
     @Column(name = "EMP_Name")
     private String EMP_Name;
@@ -33,12 +31,12 @@ public class Employee {
     private LocalDate EMP_Date_Of_Hire;
 
     @ManyToOne(optional = true, cascade=CascadeType.ALL)
-    @JoinColumn(name="EMP_ID")
+    @JoinColumn(name="EMP_Supervisor")
     private Employee EMP_Supervisor;
 
     @ManyToMany
     @JoinTable(
-            name = "EmployeeAttribute",
+            name = "Attribute",
             joinColumns = @JoinColumn(name = "EMP_ID"),
             inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
     List<Attribute> hasAttr;
@@ -60,7 +58,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Employee EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, Employee EMP_Supervisor, List<Attribute> hasAttr, String email, String password, RoleType role) {
+    public Employee(String EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, Employee EMP_Supervisor, List<Attribute> hasAttr, String email, String password, RoleType role) {
         this.EMP_ID = EMP_ID;
         this.EMP_Name = EMP_Name;
         this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;
@@ -71,11 +69,11 @@ public class Employee {
         this.role = role;
     }
 
-    public Employee getEMP_ID() {
+    public String getEMP_ID() {
         return EMP_ID;
     }
 
-    public void setEMP_ID(Employee EMP_ID) {
+    public void setEMP_ID(String EMP_ID) {
         this.EMP_ID = EMP_ID;
     }
 
