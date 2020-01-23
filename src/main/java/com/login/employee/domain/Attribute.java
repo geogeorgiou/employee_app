@@ -20,6 +20,9 @@ public class Attribute {
     @Column(name = "ATTR_Value",nullable = false)
     private String ATTR_Value;
 
+    @ManyToMany(mappedBy = "hasAttr")
+    private List<Employee> has;
+
     public Attribute() {
     }
 
@@ -53,5 +56,11 @@ public class Attribute {
         this.ATTR_Value = ATTR_Value;
     }
 
+    public List<Employee> getHas() {
+        return has;
+    }
 
+    public void setHas(List<Employee> has) {
+        this.has = has;
+    }
 }

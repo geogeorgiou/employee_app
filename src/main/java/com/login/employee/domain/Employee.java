@@ -36,7 +36,7 @@ public class Employee {
 
     @ManyToMany
     @JoinTable(
-            name = "Attribute",
+                name = "EmployeeAttribute",
             joinColumns = @JoinColumn(name = "EMP_ID"),
             inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
     List<Attribute> hasAttr;
