@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +43,11 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
     private List<Attribute> hasAttr;
 
+    //used to find all subordinates of a supervisor
+
+    @OneToMany(mappedBy="supervisor")
+    private Set<Employee> subordinates = new HashSet<Employee>();
+
     //Login Credentials related attributes
 
     @Column(name = "email", nullable = false)
@@ -59,47 +65,46 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String EMP_ID, String EMP_Name, LocalDate EMP_Date_Of_Hire, Employee EMP_Supervisor, List<Attribute> hasAttr, String email, String password, RoleType role) {
-        this.EMP_ID = EMP_ID;
-        this.EMP_Name = EMP_Name;
-        this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;
-        this.EMP_Supervisor = EMP_Supervisor;
-        this.hasAttr = hasAttr;
+    public Employee(String id, String name, LocalDate dateOfHire, Employee supervisor, String email, String password, RoleType role) {
+        this.id = id;
+        this.name = name;
+        this.dateOfHire = dateOfHire;
+        this.supervisor = supervisor;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public String getEMP_ID() {
-        return EMP_ID;
+    public String getId() {
+        return id;
     }
 
-    public void setEMP_ID(String EMP_ID) {
-        this.EMP_ID = EMP_ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getEMP_Name() {
-        return EMP_Name;
+    public String getName() {
+        return name;
     }
 
-    public void setEMP_Name(String EMP_Name) {
-        this.EMP_Name = EMP_Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public LocalDate getEMP_Date_Of_Hire() {
-        return EMP_Date_Of_Hire;
+    public LocalDate getDateOfHire() {
+        return dateOfHire;
     }
 
-    public void setEMP_Date_Of_Hire(LocalDate EMP_Date_Of_Hire) {
-        this.EMP_Date_Of_Hire = EMP_Date_Of_Hire;
+    public void setDateOfHire(LocalDate dateOfHire) {
+        this.dateOfHire = dateOfHire;
     }
 
-    public Employee getEMP_Supervisor() {
-        return EMP_Supervisor;
+    public Employee getSupervisor() {
+        return supervisor;
     }
 
-    public void setEMP_Supervisor(Employee EMP_Supervisor) {
-        this.EMP_Supervisor = EMP_Supervisor;
+    public void setSupervisor(Employee supervisor) {
+        this.supervisor = supervisor;
     }
 
     public List<Attribute> getHasAttr() {
@@ -108,6 +113,14 @@ public class Employee {
 
     public void setHasAttr(List<Attribute> hasAttr) {
         this.hasAttr = hasAttr;
+    }
+
+    public Set<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public void setSubordinates(Set<Employee> subordinates) {
+        this.subordinates = subordinates;
     }
 
     public String getEmail() {
@@ -137,10 +150,10 @@ public class Employee {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Employee{");
-        sb.append("id=").append(EMP_ID);
-        sb.append(", Name='").append(EMP_Name).append('\'');
-        sb.append(", Date Of Hire='").append(EMP_Date_Of_Hire).append('\'');
-        sb.append(", Supervisor='").append(EMP_Supervisor).append('\'');
+        sb.append("id=").append(id);
+        sb.append(", Name='").append(name).append('\'');
+        sb.append(", Date Of Hire='").append(dateOfHire).append('\'');
+        sb.append(", Supervisor='").append(supervisor).append('\'');
         sb.append(", email=").append(email);
         sb.append(", password='").append(password).append('\'');
         sb.append('}');

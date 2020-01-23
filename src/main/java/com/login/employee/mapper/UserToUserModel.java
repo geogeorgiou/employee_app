@@ -15,10 +15,10 @@ public class UserToUserModel {
     public UserModel mapToUserModel(Employee user){
         UserModel userModel = new UserModel();
 
-        userModel.setId(user.getEMP_ID());
-        userModel.setName(user.getEMP_Name());
-        userModel.setDateOfHire(user.getEMP_Date_Of_Hire().toString()); //maybe needs formatter
-        userModel.setSupervisor(user.getEMP_Supervisor().getEMP_ID()); //check for nullability
+        userModel.setId(user.getId());
+        userModel.setName(user.getName());
+        userModel.setDateOfHire(user.getDateOfHire().toString()); //maybe needs formatter
+        userModel.setSupervisor(user.getSupervisor().getId()); //check for nullability
 
         //assign login related variables
         userModel.setEmail(user.getEmail());

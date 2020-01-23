@@ -48,7 +48,7 @@ public class HomeController {
         UserModel userModel = employeeService.findByEmail(loginUser.getEmail());
 
         model.addAttribute(LOGGED_USER_ATTR, userModel);
-        model.addAttribute(LOGGED_USER_NAME, loginUser.getEMP_Name());
+        model.addAttribute(LOGGED_USER_NAME, loginUser.getName());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
 
         return "pages/userHome";

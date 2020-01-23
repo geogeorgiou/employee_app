@@ -11,14 +11,14 @@ public class Attribute {
 
     @Id
     @Column(name = "ATTR_ID",nullable = false)
-    private String ATTR_ID;
+    private String id;
 
 
     @Column(name = "ATTR_Name",nullable = false)
-    private String ATTR_Name;
+    private String name;
 
     @Column(name = "ATTR_Value",nullable = false)
-    private String ATTR_Value;
+    private String value;
 
     @ManyToMany(mappedBy = "hasAttr")
     private List<Employee> has;
@@ -26,34 +26,34 @@ public class Attribute {
     public Attribute() {
     }
 
-    public Attribute(String ATTR_ID, String ATTR_Name, String ATTR_Value) {
-        this.ATTR_ID = ATTR_ID;
-        this.ATTR_Name = ATTR_Name;
-        this.ATTR_Value = ATTR_Value;
+    public Attribute(String id, String name, String value) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
     }
 
-    public String getATTR_ID() {
-        return ATTR_ID;
+    public String getId() {
+        return id;
     }
 
-    public void setATTR_ID(String ATTR_ID) {
-        this.ATTR_ID = ATTR_ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getATTR_Name() {
-        return ATTR_Name;
+    public String getName() {
+        return name;
     }
 
-    public void setATTR_Name(String ATTR_Name) {
-        this.ATTR_Name = ATTR_Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getATTR_Value() {
-        return ATTR_Value;
+    public String getValue() {
+        return value;
     }
 
-    public void setATTR_Value(String ATTR_Value) {
-        this.ATTR_Value = ATTR_Value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public List<Employee> getHas() {
