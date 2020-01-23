@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 
 //Main Entity of the Web App
@@ -21,25 +22,25 @@ public class Employee {
 
     @Id
     @Column(name = "EMP_ID",nullable = false)
-    private String EMP_ID;
+    private String id;
 
     @Column(name = "EMP_Name")
-    private String EMP_Name;
+    private String name;
 
     @Column(name = "EMP_Date_Of_Hire")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate EMP_Date_Of_Hire;
+    private LocalDate dateOfHire;
 
     @ManyToOne(optional = true, cascade=CascadeType.ALL)
     @JoinColumn(name="EMP_Supervisor")
-    private Employee EMP_Supervisor;
+    private Employee supervisor;
 
     @ManyToMany
     @JoinTable(
                 name = "EmployeeAttribute",
             joinColumns = @JoinColumn(name = "EMP_ID"),
             inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
-    List<Attribute> hasAttr;
+    private List<Attribute> hasAttr;
 
     //Login Credentials related attributes
 
