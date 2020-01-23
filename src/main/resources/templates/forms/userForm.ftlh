@@ -4,21 +4,22 @@
 
 <#--uses passValidator on submit to check password format-->
 
- <form class="needs-validation" action="/user/home" id="userValidator" method="POST" onsubmit="return passValidator();">
+ <form class="needs-validation" action="/user/home" id="" method="POST" onsubmit="">
 
 
     <#--    row with first and last name input-->
     <div class="row">
 
         <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" value="${loggedUser.firstName}" required>
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" name="id" placeholder="Enter id" value="${loggedUser.id}">
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" value="${loggedUser.lastName}" required>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="${loggedUser.name}">
         </div>
+
 
     </div>
 
@@ -26,33 +27,13 @@
     <div class="row">
 
         <div class="col-md-6 mb-3">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="${loggedUser.email}" readonly>
+            <label for="dateOfHire">Email</label>
+            <input type="date" class="form-control" id="dateOfHire" name="dateOfHire" placeholder="Enter date" value="${loggedUser.dateOfHire}">
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="phoneNumber">Phone Number</label>
-            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" value="${loggedUser.phoneNumber}">
-        </div>
-
-    </div>
-
-    <#--    row with company-->
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="company">Company</label>
-            <input type="text" class="form-control" id="company" name="company" placeholder="Enter Company" value="${loggedUser.company}">
-        </div>
-    </div>
-
-    <#--    row with password-->
-    <div class="row">
-
-        <div class="col-md-6 mb-3">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" value="${loggedUser.password}" required>
-
-            <p><span class="emsg hidden">at least 1 ([a-z] and/or [A-Z]), 1 numeric [0-9], a special char and at least 8 char total</span></p>
+            <label for="supervisor">Supervisor</label>
+            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Enter supervisor" value="${loggedUser.supervisor}">
         </div>
 
     </div>

@@ -49,7 +49,46 @@
             </#if>
 
 <#--            include user form here-->
-            <#include "../forms/userForm.ftlh">
+<#--            <#include "../forms/userForm.ftlh">-->
+
+
+            <div class="table-responsive"   id="emptyList">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>Hire Date</th>
+                        <th>Name</th>
+                        <th>Supervisor</th>
+                        <th>Edit</th>
+                        <th>Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if employees??>
+                        <#list employees as emp>
+                            <tr data-id="1">
+                                <td>${emp.id}</td>
+                                <td>${emp.dateOfHire}</td>
+                                <td>${emp.name}</td>
+                                <td>${emp.supervisor}</td>
+                                <td>
+                                    <a href="/admin/emp/${emp.id}/edit">
+                                        <span data-feather="tool"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form action="/admin/emp/${emp.id}/delete" method="post" style="display: inline;" id="form_box">
+                                        <button type="submit" class="btn btn-danger delete_icon"><span data-feather="x"></span></button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        </#list>
+                    </#if>
+                    </tbody>
+                </table>
+            </div>
 
         </main>
     </div>
@@ -65,7 +104,7 @@
 
 <#--scripts for validation of input fields + password-->
 <#--<script src="/js/passValidator.js"></script>-->
-<script src="/js/validator.js"></script>
+<#--<script src="/js/validator.js"></script>-->
 
 </body>
 </html>

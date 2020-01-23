@@ -2,7 +2,7 @@ package com.login.employee.mapper;
 
 import com.login.employee.domain.Employee;
 import com.login.employee.enums.RoleType;
-import com.login.employee.model.UserModel;
+import com.login.employee.model.EmployeeModel;
 import org.springframework.stereotype.Component;
 
 //Mapper class from User to UserModel Data
@@ -12,20 +12,20 @@ public class UserToUserModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
-    public UserModel mapToUserModel(Employee user){
-        UserModel userModel = new UserModel();
+    public EmployeeModel mapToEmployeeModel(Employee emp){
+        EmployeeModel empModel = new EmployeeModel();
 
-        userModel.setId(user.getId());
-        userModel.setName(user.getName());
-        userModel.setDateOfHire(user.getDateOfHire().toString()); //maybe needs formatter
-        userModel.setSupervisor(user.getSupervisor().getId()); //check for nullability
+        empModel.setId(emp.getId());
+        empModel.setName(emp.getName());
+        empModel.setDateOfHire(emp.getDateOfHire().toString()); //maybe needs formatter
+        empModel.setSupervisor(emp.getSupervisor() != null ? emp.getSupervisor().getId() : "n/a"); //check for nullability
 
-        //assign login related variables
-        userModel.setEmail(user.getEmail());
-        userModel.setPassword(user.getPassword());
-        userModel.setRole(user.getRole() != null ? user.getRole() : RoleType.USER); //USER IS THE DEFAULT OPTION
+        //assign login related variables useless here?
+        empModel.setEmail(emp.getEmail());
+        empModel.setPassword(emp.getPassword());
+        empModel.setRole(emp.getRole() != null ? emp.getRole() : RoleType.USER); //USER IS THE DEFAULT OPTION
 
-        return userModel;
+        return empModel;
 
     }
 

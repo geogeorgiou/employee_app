@@ -2,13 +2,15 @@ package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
 import com.login.employee.mapper.UserToUserModel;
-import com.login.employee.model.UserModel;
+import com.login.employee.model.EmployeeModel;
 import com.login.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,22 +33,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     //then map it to Model
 
     @Override
-    public UserModel findByEmail(String email){
+    public EmployeeModel findByEmail(String email){
 
         //needs some exception handling here if exists etc
         Optional<Employee> employee = userRepo.findByEmail(email);
-        return mapper.mapToUserModel(employee.get());
+        return mapper.mapToEmployeeModel(employee.get());
     }
 
+    @Override
+    public List<EmployeeModel> findAll() {
+        return userRepo
+                .findAll()
+                .stream()
+                .map(employee -> mapper.mapToEmployeeModel(employee))
+                .collect(Collectors.toList());
+    }
 
     //AUTO GENERATED
     @Override
-    public Employee updateUser(UserModel userModel) {
+    public Employee updateUser(EmployeeModel userModel) {
         return null;
     }
 
     @Override
-    public Employee createUser(UserModel userModel) {
+    public Employee createUser(EmployeeModel userModel) {
         return null;
     }
 

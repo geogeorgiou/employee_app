@@ -3,7 +3,7 @@ package com.login.employee.model;
 import com.login.employee.enums.RoleType;
 
 //necessary functional for ftl to display
-public class UserModel {
+public class EmployeeModel {
 
     //UserModel variables
     private String id;
@@ -20,7 +20,7 @@ public class UserModel {
 
     private RoleType role;
 
-    public UserModel() {
+    public EmployeeModel() {
     }
 
     public String getId() {

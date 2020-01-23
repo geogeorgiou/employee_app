@@ -3,7 +3,7 @@ package com.login.employee.controller.user;
 
 import com.login.employee.enums.RoleType;
 import com.login.employee.exception.DuplicateEmailException;
-import com.login.employee.model.UserModel;
+import com.login.employee.model.EmployeeModel;
 import com.login.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,7 @@ public class RegisterController {
     public String getRegister(Model model){
 
         //assign UserModel attribute to model to use it later
-        model.addAttribute(LOGGED_USER_ATTR, new UserModel());
+        model.addAttribute(LOGGED_USER_ATTR, new EmployeeModel());
 
         return "pages/register";
     }
@@ -47,7 +47,7 @@ public class RegisterController {
     //POST /register
     @PostMapping({"/register"})
     public String postRegister(Model model,
-                                @ModelAttribute(LOGGED_USER_ATTR) UserModel userForm){
+                                @ModelAttribute(LOGGED_USER_ATTR) EmployeeModel userForm){
 
         //try-catch block for Duplicate Mail check
         //when duplicate mail is inserted an error message will be show on /register
