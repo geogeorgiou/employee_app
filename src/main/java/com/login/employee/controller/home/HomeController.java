@@ -11,8 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 //Controller that handles /user/home
 
@@ -60,6 +63,19 @@ public class HomeController {
 
         return "pages/userHome";
     }
+
+    @GetMapping(value = "/user/{id}/edit")
+    public String getEditEmployee(@PathVariable String id,Model model){
+
+        Optional<Employee> optEmployee = employeeService.findById(id);
+
+
+        return "pages/editEmployee";
+    }
+
+
+
+
 
     //POST of /user/home
     //Handles the submitted form

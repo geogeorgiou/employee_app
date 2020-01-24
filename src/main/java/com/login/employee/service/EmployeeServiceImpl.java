@@ -32,6 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     //using Repository that extends JPA to find User By Email
     //then map it to Model
 
+
+    @Override
+    public Optional<Employee> findById(String id) {
+        return userRepo.findById(id);
+    }
+
     @Override
     public EmployeeModel findByEmail(String email){
 
