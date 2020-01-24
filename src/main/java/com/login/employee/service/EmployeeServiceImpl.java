@@ -1,7 +1,7 @@
 package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
-import com.login.employee.mapper.UserToUserModel;
+import com.login.employee.mapper.EmployeeToEmployeeModel;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //mapper to map DB data to Model data
     @Autowired
-    private UserToUserModel mapper;
+    private EmployeeToEmployeeModel mapper;
 
     //BCrypt encoder for password encryption
     @Autowired

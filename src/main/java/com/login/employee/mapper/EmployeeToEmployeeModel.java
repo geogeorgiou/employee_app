@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 //Mapper class from User to UserModel Data
 
 @Component
-public class UserToUserModel {
+public class EmployeeToEmployeeModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
