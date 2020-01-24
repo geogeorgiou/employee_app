@@ -73,12 +73,12 @@
                                 <td>${emp.name}</td>
                                 <td>${emp.supervisor}</td>
                                 <td>
-                                    <a href="/admin/emp/${emp.id}/edit">
+                                    <a href="/admin/${emp.id}/edit">
                                         <span data-feather="tool"></span>
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="/admin/emp/${emp.id}/delete" method="post" style="display: inline;" id="form_box">
+                                    <form action="/admin/${emp.id}/delete" method="post" style="display: inline;" id="form_box">
                                         <button type="submit" class="btn btn-danger delete_icon"><span data-feather="x"></span></button>
                                     </form>
                                 </td>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.Optional;
 //Controller that handles /user/home
 
 @Controller
+@RequestMapping("/admin")
 public class HomeController {
 
 
@@ -27,6 +29,7 @@ public class HomeController {
 
     //static variable relating to
     private static final String EMPLOYEES_LIST = "employees";
+    private static final String EMPLOYEE_ATTR = "employee";
 
     //static variables relating to webapp user
     private static final String LOGGED_USER_ATTR = "loggedUser";
@@ -39,7 +42,7 @@ public class HomeController {
 
     //GET of /user/home
 
-    @GetMapping(value = "/user/home")
+    @GetMapping(value = "/home")
     public String getUserProfile(Model model) {
 
         //Handle details of currently authenticated user
@@ -64,10 +67,12 @@ public class HomeController {
         return "pages/userHome";
     }
 
-    @GetMapping(value = "/user/{id}/edit")
+    @GetMapping(value = "/{id}/edit")
     public String getEditEmployee(@PathVariable String id,Model model){
 
-        Optional<Employee> optEmployee = employeeService.findById(id);
+        EmployeeModel employeeModel = employeeService.findById(id);
+
+        model.addAttribute(EMPLOYEE_ATTR,employeeModel);
 
 
         return "pages/editEmployee";

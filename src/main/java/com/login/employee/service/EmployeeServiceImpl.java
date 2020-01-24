@@ -34,8 +34,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Optional<Employee> findById(String id) {
-        return userRepo.findById(id);
+    public EmployeeModel findById(String id) {
+        Optional<Employee> employee = userRepo.findById(id);
+        return mapper.ToEmployeeModel(employee.get());
     }
 
     @Override
@@ -43,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //needs some exception handling here if exists etc
         Optional<Employee> employee = userRepo.findByEmail(email);
-        return mapper.mapToEmployeeModel(employee.get());
+        return mapper.ToEmployeeModel(employee.get());
     }
 
     @Override
@@ -51,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return userRepo
                 .findAll()
                 .stream()
-                .map(employee -> mapper.mapToEmployeeModel(employee))
+                .map(employee -> mapper.ToEmployeeModel(employee))
                 .collect(Collectors.toList());
     }
 

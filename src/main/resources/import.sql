@@ -1,7 +1,7 @@
 -- ALL DATA ARE IMPORTED HERE
 
 
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('82D58D49-72A2-42B0-A250-471E5C10D7D9', 'Greg', CURDATE(), null , 'greg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('82D58D49-72A2-42B0-A250-471E5C10D7D9', 'Greg', CURDATE(), null , 'greg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','ADMIN');
 INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('8CEE7A83-A9EB-4170-B7E8-5D4F0440C074', 'Oleg', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9','oleg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
 INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('561E2D88-A747-460F-99E1-CFB1D3D8CA5C', 'Pete', CURDATE(), '8CEE7A83-A9EB-4170-B7E8-5D4F0440C074', 'pete@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
 INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('28106345-435B-4215-AECF-7C226C071E11', 'Paul', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9', 'paul@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');

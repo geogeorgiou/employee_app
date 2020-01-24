@@ -12,7 +12,7 @@ public class EmployeeToEmployeeModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
-    public EmployeeModel mapToEmployeeModel(Employee emp){
+    public EmployeeModel ToEmployeeModel(Employee emp){
         EmployeeModel empModel = new EmployeeModel();
 
         empModel.setId(emp.getId());
