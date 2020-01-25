@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12 order-md-1">
             <h4 class="mb-3">Edit Employee</h4>
-            <#include "../forms/editEmployeeForm.ftlh">
+            <#include "../forms/createEmployeeForm.ftlh">
         </div>
     </div>
 </main>

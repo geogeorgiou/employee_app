@@ -82,6 +82,19 @@ public class HomeController {
         return "redirect:/admin/home";
     }
 
+    @GetMapping(value = "/create")
+    public String getCreateEmployee(Model model){
+        model.addAttribute(EMPLOYEE_ATTR, new EmployeeModel());
+        return "pages/createEmployee";
+    }
+
+    @PostMapping(value = "/create")
+    public String doCreateEmployee(EmployeeModel employeeModel){
+        employeeService.createEmployee(employeeModel);
+        return "pages/userHome";
+    }
+
+
     @PostMapping(value = "/{id}/delete")
     public String deleteEmployee(@PathVariable String id){
         employeeService.deleteById(id);

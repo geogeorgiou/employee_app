@@ -18,8 +18,6 @@ import java.util.Set;
 @Table(name = "Employee")
 public class Employee {
 
-//    @Autowired
-//    private EmployeeRepository employeeRepository;
 
     //User variables
 

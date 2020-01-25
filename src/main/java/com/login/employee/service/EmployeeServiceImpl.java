@@ -112,9 +112,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setName(empModel.getName());
         employee.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
 
-        employee.setEmail("");
-        employee.setRole(RoleType.ADMIN);
-        employee.setPassword("");
+//        employee.setEmail("");
+//        employee.setRole(RoleType.ADMIN);
+//        employee.setPassword("");
 
         return userRepo.save(employee);
 

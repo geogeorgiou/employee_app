@@ -26,9 +26,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/create">
                             <span data-feather="search"></span>
-                            Search Owner
+                            Create Repair
                         </a>
                     </li>
 
