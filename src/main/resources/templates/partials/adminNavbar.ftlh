@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
 
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-        <span>Create New Employee</span>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0">
+        <span>Brand</span>
     </a>
 
     <ul class="navbar-nav px-3">
@@ -28,7 +28,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/create">
                             <span data-feather="search"></span>
-                            Create Repair
+                            Create Employee
                         </a>
                     </li>
 

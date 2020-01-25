@@ -50,16 +50,19 @@ public class Employee {
 
     //Login Credentials related attributes
 
-    @Column(name = "email", nullable = false)
+    //nullable false ?
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false)
+    //nullable false ?
+    @Column(name = "password")
     private String password;
 
+    //nullable false ?
     //role is the attribute to distinguish if user
     //is admin or plain user
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
     private RoleType role;
 
     public Employee() {
