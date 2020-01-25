@@ -11,12 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 //Controller that handles /user/home
 
@@ -74,8 +73,19 @@ public class HomeController {
 
         model.addAttribute(EMPLOYEE_ATTR,employeeModel);
 
-
         return "pages/editEmployee";
+    }
+
+    @PostMapping(value = "/{id}")
+    public String doEditEmployee(@PathVariable String id, EmployeeModel employeeModel) {
+        employeeService.updateEmployee(employeeModel);
+        return "redirect:/admin/home";
+    }
+
+    @PostMapping(value = "/{id}/delete")
+    public String deleteEmployee(@PathVariable String id){
+        employeeService.deleteById(id);
+        return "redirect:/admin/home";
     }
 
 

@@ -1,6 +1,8 @@
 package com.login.employee.domain;
 
 import com.login.employee.enums.RoleType;
+import com.login.employee.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,8 +18,8 @@ import java.util.Set;
 @Table(name = "Employee")
 public class Employee {
 
-    //Static variables
-//    private static final int MAX_PHONE_LENGTH = 10;
+//    @Autowired
+//    private EmployeeRepository employeeRepository;
 
     //User variables
 
@@ -32,7 +34,7 @@ public class Employee {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfHire;
 
-    @ManyToOne(optional = true, cascade=CascadeType.ALL)
+    @ManyToOne(optional = true)
     @JoinColumn(name="EMP_Supervisor")
     private Employee supervisor;
 

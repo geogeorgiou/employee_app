@@ -61,7 +61,7 @@ public class RegisterController {
             model.addAttribute(LOGGED_USER_ROLE, userForm.getRole().name());
 
             //Creates user
-            logService.createUser(userForm);
+            logService.createEmployee(userForm);
 
         }catch (DuplicateEmailException dee){
 

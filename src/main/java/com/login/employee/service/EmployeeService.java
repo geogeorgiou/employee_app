@@ -17,9 +17,13 @@ public interface EmployeeService {
 
     //UPDATE
 
-    Employee updateUser(EmployeeModel userModel);
+    Employee updateEmployee(EmployeeModel empModel);
 
     //CREATE
 
-    Employee createUser(EmployeeModel userModel);
+    Employee createEmployee(EmployeeModel empModel);
+
+    //DELETE
+
+    void deleteById(String id);
 }

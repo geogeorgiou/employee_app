@@ -1,6 +1,8 @@
 package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
+import com.login.employee.enums.RoleType;
+import com.login.employee.mapper.EmployeeModelToEmployee;
 import com.login.employee.mapper.EmployeeToEmployeeModel;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.repository.EmployeeRepository;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,7 +25,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //mapper to map DB data to Model data
     @Autowired
-    private EmployeeToEmployeeModel mapper;
+    private EmployeeToEmployeeModel employeeModelMapper;
+
+    @Autowired
+    private EmployeeModelToEmployee employeeMapper;
 
     //BCrypt encoder for password encryption
     @Autowired
@@ -36,7 +43,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeModel findById(String id) {
         Optional<Employee> employee = userRepo.findById(id);
-        return mapper.ToEmployeeModel(employee.get());
+
+        //redundant here
+//        Set<Employee> setemp = userRepo.findSubBySupervisorId(employee.get().getId());
+//
+//        Iterator<Employee> it = setemp.iterator();
+//
+//        while (it.hasNext())
+//            System.out.println(it.next().getId());
+
+        return employeeModelMapper.ToEmployeeModel(employee.get());
     }
 
     @Override
@@ -44,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //needs some exception handling here if exists etc
         Optional<Employee> employee = userRepo.findByEmail(email);
-        return mapper.ToEmployeeModel(employee.get());
+        return employeeModelMapper.ToEmployeeModel(employee.get());
     }
 
     @Override
@@ -52,19 +68,56 @@ public class EmployeeServiceImpl implements EmployeeService {
         return userRepo
                 .findAll()
                 .stream()
-                .map(employee -> mapper.ToEmployeeModel(employee))
+                .map(employee -> employeeModelMapper.ToEmployeeModel(employee))
                 .collect(Collectors.toList());
     }
 
     //AUTO GENERATED
     @Override
-    public Employee updateUser(EmployeeModel userModel) {
-        return null;
+    public Employee updateEmployee(EmployeeModel empModel) {
+
+        String empId = empModel.getId();
+        String superId = empModel.getSupervisor();
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Employee emp = userRepo.findById(empId).get();
+
+        emp.setId(empId); //readonly
+        emp.setName(empModel.getName());
+        emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
+        emp.setSupervisor(userRepo.findById(superId).get()); //readonly
+
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//        String empId = empModel.getId();
+//        String superId = empModel.getSupervisor();
+//
+//        emp.setId(empId); //is readonly
+//        emp.setName(empModel.getName());
+//        emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter)); //maybe needs formatter
+//
+//        emp.setSupervisor(empRepo.findById(superId).get());
+
+        return userRepo.save(emp);
     }
 
     @Override
-    public Employee createUser(EmployeeModel userModel) {
-        return null;
+    public Employee createEmployee(EmployeeModel empModel) {
+        Employee employee = new Employee();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        employee.setId(empModel.getId());
+        //exists? not himself?
+        employee.setSupervisor(userRepo.findById(empModel.getSupervisor()).get());
+        employee.setName(empModel.getName());
+        employee.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
+
+        employee.setEmail("");
+        employee.setRole(RoleType.ADMIN);
+        employee.setPassword("");
+
+        return userRepo.save(employee);
+
     }
 
     //UPDATE
@@ -134,4 +187,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        return userRepo.save(loginUser);
 //    }
 
+
+    @Override
+    public void deleteById(String id) {
+        userRepo.deleteById(id);
+    }
 }

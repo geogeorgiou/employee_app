@@ -1,4 +1,4 @@
-<form class="needs-validation" novalidate action="/admin/${employee.id}/edit" id="" method="POST">
+<form class="needs-validation" novalidate action="/admin/${employee.id}" id="" method="POST">
 
 
     <div class="row">
@@ -21,9 +21,17 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="supervisor">Supervisor</label>
-            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Enter supervisor" value="${employee.supervisor}">
+            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Enter supervisor" value="${employee.supervisor}" readonly>
 
         </div>
+    </div>
+
+    <div class="col-md-6 order-md-1">
+        <div class="row">
+            <button class="btn btn-primary btn-lg mt-4" type="submit" >Submit</button>&nbsp&nbsp&nbsp
+            <span id="buttonAppear"></span>
+        </div>
+        <br><br><br>
     </div>
 </form>
 

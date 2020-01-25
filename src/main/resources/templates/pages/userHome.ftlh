@@ -48,10 +48,6 @@
                 <h2>Welcome ${userFirstName}!</h2>
             </#if>
 
-<#--            include user form here-->
-<#--            <#include "../forms/userForm.ftlh">-->
-
-
             <div class="table-responsive"   id="emptyList">
                 <table class="table table-striped table-sm">
                     <thead>
