@@ -46,14 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeModel findById(String id) {
         Optional<Employee> employee = userRepo.findById(id);
 
-        //redundant here
-//        Set<Employee> setemp = userRepo.findSubBySupervisorId(employee.get().getId());
-//
-//        Iterator<Employee> it = setemp.iterator();
-//
-//        while (it.hasNext())
-//            System.out.println(it.next().getId());
-
         return employeeModelMapper.ToEmployeeModel(employee.get());
     }
 
@@ -90,7 +82,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //check for null cases (null,""," ") in superId (wanted no supervision)
         if (superId.isBlank()){
-            emp.setSupervisor(new Employee()); //assign null employee
+//            Employee newSupervisor = new Employee();
+//            newSupervisor.setId("n/a");
+            emp.setSupervisor(null); //assign null employee
             return userRepo.save(emp);
         }
 

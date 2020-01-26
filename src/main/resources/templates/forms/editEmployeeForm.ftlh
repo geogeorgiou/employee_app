@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="supervisor">Supervisor</label>
-            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Enter supervisor" value="${employee.supervisor}" readonly>
+            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Enter supervisor" value="${employee.supervisor}">
 
         </div>
     </div>
