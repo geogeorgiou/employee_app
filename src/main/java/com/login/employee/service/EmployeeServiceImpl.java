@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,20 +87,58 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setId(empId); //readonly
         emp.setName(empModel.getName());
         emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
-        emp.setSupervisor(userRepo.findById(superId).get()); //readonly
 
-//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//        String empId = empModel.getId();
-//        String superId = empModel.getSupervisor();
-//
-//        emp.setId(empId); //is readonly
-//        emp.setName(empModel.getName());
-//        emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter)); //maybe needs formatter
-//
-//        emp.setSupervisor(empRepo.findById(superId).get());
+        //check for null cases (null,""," ") in superId (wanted no supervision)
+        if (superId.isBlank()){
+            emp.setSupervisor(new Employee()); //assign null employee
+            return userRepo.save(emp);
+        }
+
+        Optional<Employee> foundSupervisor = userRepo.findById(superId);
+
+//        emp.setSupervisor(foundSupervisor != null  ); //readonly
+
+
+
+        if (foundSupervisor != null){
+
+            //cannot have as supervisor himself!
+            if (superId.equals(empId)){
+                //throws error cyclic relation error
+                System.out.println("cyclic relation error!");
+            }
+
+            //cannot have as supervisor one of his descendants
+            if (!existsInSubordinateSet(empId)){
+
+            }
+
+
+        } else {
+            //cannot find supervisor?
+            //throw null pointer exception!
+            System.out.println("No such supervisor Id");
+        }
+
 
         return userRepo.save(emp);
+    }
+
+    public boolean existsInSubordinateSet(String empId){
+        Set<Employee> employeeSet = userRepo.findSubBySupervisorId(empId);
+
+        Iterator<Employee> it = employeeSet.iterator();
+        boolean exists = false;
+
+        while (it.hasNext()){
+            if (it.next().getId().equals(empId)){
+                //throw exception supervisor is a descendant!
+                System.out.println("supervisor is a descendant!");
+                exists = true;
+            }
+        }
+
+        return exists;
     }
 
     @Override
@@ -119,6 +159,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return userRepo.save(employee);
 
     }
+
+
 
     //UPDATE
 

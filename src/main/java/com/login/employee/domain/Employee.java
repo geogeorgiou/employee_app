@@ -148,24 +148,6 @@ public class Employee {
         this.role = role;
     }
 
-    //returns all children to any level
-    public Set<Employee> getAllSubordinates(){
-        return getAllSubordinates(this);
-    }
-
-    //recursive function to walk the tree
-    private Set<Employee> getAllSubordinates(Employee parent){
-        Set<Employee> allSubs = new HashSet<>();
-
-//        System.out.println("the hell got me");
-        for(Employee sub : subordinates){
-            allSubs.add(sub);
-//            allSubs.addAll(getAllSubordinates(sub));
-        }
-
-        return allSubs;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Employee{");
