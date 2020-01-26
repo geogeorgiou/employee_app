@@ -1,8 +1,6 @@
 package com.login.employee.domain;
 
 import com.login.employee.enums.RoleType;
-import com.login.employee.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -32,7 +30,7 @@ public class Employee {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfHire;
 
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true,fetch = FetchType.EAGER)
     @JoinColumn(name="EMP_Supervisor")
     private Employee supervisor;
 
@@ -46,7 +44,7 @@ public class Employee {
     //used to find all subordinates of a supervisor
 
     @OneToMany(mappedBy="supervisor")
-    private Set<Employee> subordinates = new HashSet<Employee>();
+    private Set<Employee> subordinates; // = new HashSet<Employee>();
 
     //Login Credentials related attributes
 
@@ -148,6 +146,24 @@ public class Employee {
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    //returns all children to any level
+    public Set<Employee> getAllSubordinates(){
+        return getAllSubordinates(this);
+    }
+
+    //recursive function to walk the tree
+    private Set<Employee> getAllSubordinates(Employee parent){
+        Set<Employee> allSubs = new HashSet<>();
+
+//        System.out.println("the hell got me");
+        for(Employee sub : subordinates){
+            allSubs.add(sub);
+//            allSubs.addAll(getAllSubordinates(sub));
+        }
+
+        return allSubs;
     }
 
     @Override

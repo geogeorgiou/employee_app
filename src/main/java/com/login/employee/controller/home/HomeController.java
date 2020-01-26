@@ -4,6 +4,7 @@ package com.login.employee.controller.home;
 import com.login.employee.domain.Employee;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
+import com.login.employee.repository.EmployeeRepository;
 import com.login.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 //Controller that handles /user/home
 
@@ -35,6 +38,10 @@ public class HomeController {
     //User Service
     @Autowired
     private EmployeeService employeeService;
+
+    //DELETE AFTERWARDS!
+    @Autowired
+    private EmployeeRepository REPO;
 
     //GET of /user/home
 
@@ -67,6 +74,28 @@ public class HomeController {
     public String getEditEmployee(@PathVariable String id,Model model){
 
         EmployeeModel employeeModel = employeeService.findById(id);
+
+        System.out.println("got here");
+//        Set<Employee> empSet = REPO.findSubBySupervisorId(id);
+//
+//        Iterator<Employee> it = empSet.iterator();
+//
+//        while (it.hasNext()) {
+//            System.out.println(it.next().toString());
+//            System.out.println("got not here?");
+//        }
+
+//        String superId = "82D58D49-72A2-42B0-A250-471E5C10D7D9";
+        Set<String> empSet = REPO.findSubStrBySupervisorId("82D58D49-72A2-42B0-A250-471E5C10D7D9");
+
+        Iterator<String> it = empSet.iterator();
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+            System.out.println("got not here?");
+        }
+
+
 
         model.addAttribute(EMPLOYEE_ATTR,employeeModel);
 
