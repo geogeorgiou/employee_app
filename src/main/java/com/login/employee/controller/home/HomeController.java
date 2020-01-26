@@ -26,9 +26,10 @@ public class HomeController {
 
     //variables to assign to Model and used in ftl
 
-    //static variable relating to
+    //static variable relating to Employee
     private static final String EMPLOYEES_LIST = "employees";
     private static final String EMPLOYEE_ATTR = "employee";
+    private static final String ERR_MSG = "errMsg";
 
     //static variables relating to webapp user
     private static final String LOGGED_USER_ATTR = "loggedUser";
@@ -75,24 +76,26 @@ public class HomeController {
 
         EmployeeModel employeeModel = employeeService.findById(id);
 
-//        Set<Employee> empSet = REPO.findSubBySupervisorId("82D58D49-72A2-42B0-A250-471E5C10D7D9");
-//
-//        Iterator<Employee> it = empSet.iterator();
-//
-//        while (it.hasNext()) {
-//            System.out.println(it.next());
-//        }
-
-
-
         model.addAttribute(EMPLOYEE_ATTR,employeeModel);
 
         return "pages/editEmployee";
     }
 
-    @PostMapping(value = "/{id}")
-    public String doEditEmployee(@PathVariable String id, EmployeeModel employeeModel) {
-        employeeService.updateEmployee(employeeModel);
+    @PostMapping(value = "/{id}/edit")
+    public String doEditEmployee(EmployeeModel employeeModel,Model model) {
+
+        try{
+
+            employeeService.updateEmployee(employeeModel);
+
+        } catch (NullPointerException npe){
+
+            //add to model error message for print? Doesn't show
+            System.out.println(npe.getMessage());
+            model.addAttribute(ERR_MSG,npe.getMessage());
+
+            return "redirect:/admin/{id}/edit";
+        }
         return "redirect:/admin/home";
     }
 

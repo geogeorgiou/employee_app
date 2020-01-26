@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -68,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //AUTO GENERATED
     @Override
-    public Employee updateEmployee(EmployeeModel empModel) {
+    public Employee updateEmployee(EmployeeModel empModel) throws NullPointerException {
 
         String empId = empModel.getId();
         String superId = empModel.getSupervisor();
@@ -82,8 +83,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //check for null cases (null,""," ") in superId (wanted no supervision)
         if (superId.isBlank()){
-//            Employee newSupervisor = new Employee();
-//            newSupervisor.setId("n/a");
             emp.setSupervisor(null); //assign null employee
             return userRepo.save(emp);
         }
@@ -94,7 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 
-        if (foundSupervisor != null){
+        if (foundSupervisor.isPresent()){
 
             //cannot have as supervisor himself!
             if (superId.equals(empId)){
@@ -111,7 +110,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             //cannot find supervisor?
             //throw null pointer exception!
-            System.out.println("No such supervisor Id");
+//            System.out.println("No such supervisor Id");
+            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
+
         }
 
 
