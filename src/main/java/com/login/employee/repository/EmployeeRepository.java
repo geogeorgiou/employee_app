@@ -34,46 +34,31 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 //    "select * from sub",nativeQuery = true)
 
     @Query(
-    value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor) as( " +
-            "select EMP_ID,EMP_Name,EMP_Supervisor " +
+    value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire,email,password,role) as( " +
+            "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire,email,password,role " +
             "from employee " +
             "where employee.EMP_Supervisor = :superId " +
             "union all " +
-            "select emp.EMP_ID,emp.EMP_Name,emp.EMP_Supervisor " +
+            "select emp.EMP_ID,emp.EMP_Name,emp.EMP_Supervisor,emp.EMP_Date_Of_Hire,emp.email,emp.password,emp.role " +
             "from employee emp " +
             "inner join sub " +
             "on emp.EMP_Supervisor = sub.EMP_ID " +
             ") " +
-            "select EMP_ID from sub",nativeQuery = true)
+            "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire,email,password,role from sub",nativeQuery = true)
     Set<Employee> findSubBySupervisorId(@Param("superId") String id);
 
-    @Query(
-            value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor) as( " +
-                    "select EMP_ID,EMP_Name,EMP_Supervisor " +
-                    "from employee " +
-                    "where employee.EMP_Supervisor = :superId " +
-                    "union all " +
-                    "select emp.EMP_ID,emp.EMP_Name,emp.EMP_Supervisor " +
-                    "from employee emp " +
-                    "inner join sub " +
-                    "on emp.EMP_Supervisor = sub.EMP_ID " +
-                    ") " +
-                    "select EMP_ID from sub",nativeQuery = true)
-    Set<String> findSubStrBySupervisorId(@Param("superId") String id);
-
-//    @Query(value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor) as(\n" +
-//            "    select EMP_ID,EMP_Name,EMP_Supervisor\n" +
-//            "    from employee\n" +
-//            "    where employee.EMP_Supervisor = '82D58D49-72A2-42B0-A250-471E5C10D7D9'\n" +
-//            "    \n" +
-//            "    union all\n" +
-//            "    \n" +
-//            "    select emp.EMP_ID,emp.EMP_Name,emp.EMP_Supervisor\n" +
-//            "    from employee emp\n" +
-//            "    inner join sub\n" +
-//            "    on emp.EMP_Supervisor = sub.EMP_ID\n" +
-//            ")\n" +
-//            "select * from sub",nativeQuery = true)
-//    Set<Employee> findSubBySupervisorId(String id);
+//    @Query(
+//            value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire) as( " +
+//                    "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire " +
+//                    "from employee " +
+//                    "where employee.EMP_Supervisor = :superId " +
+//                    "union all " +
+//                    "select emp.EMP_ID,emp.EMP_Name,emp.EMP_Supervisor,emp.EMP_Date_Of_Hire " +
+//                    "from employee emp " +
+//                    "inner join sub " +
+//                    "on emp.EMP_Supervisor = sub.EMP_ID " +
+//                    ") " +
+//                    "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire from sub",nativeQuery = true)
+//    Set<Employee> findSubBySupervisorId(@Param("superId") String id);
 
 }

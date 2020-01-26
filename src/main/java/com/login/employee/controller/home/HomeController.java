@@ -75,25 +75,13 @@ public class HomeController {
 
         EmployeeModel employeeModel = employeeService.findById(id);
 
-        System.out.println("got here");
-//        Set<Employee> empSet = REPO.findSubBySupervisorId(id);
+//        Set<Employee> empSet = REPO.findSubBySupervisorId("82D58D49-72A2-42B0-A250-471E5C10D7D9");
 //
 //        Iterator<Employee> it = empSet.iterator();
 //
 //        while (it.hasNext()) {
-//            System.out.println(it.next().toString());
-//            System.out.println("got not here?");
+//            System.out.println(it.next());
 //        }
-
-//        String superId = "82D58D49-72A2-42B0-A250-471E5C10D7D9";
-        Set<String> empSet = REPO.findSubStrBySupervisorId("82D58D49-72A2-42B0-A250-471E5C10D7D9");
-
-        Iterator<String> it = empSet.iterator();
-
-        while (it.hasNext()) {
-            System.out.println(it.next());
-            System.out.println("got not here?");
-        }
 
 
 
