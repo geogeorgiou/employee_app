@@ -2,6 +2,7 @@ package com.login.employee.controller.home;
 
 
 import com.login.employee.domain.Employee;
+import com.login.employee.exception.CyclicChildException;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
 import com.login.employee.repository.EmployeeRepository;
@@ -88,14 +89,17 @@ public class HomeController {
 
             employeeService.updateEmployee(employeeModel);
 
-        } catch (NullPointerException npe){
+            //both nullpointer (cannot find supervisor) and (cyclic reference) are of identical behaviour
+        } catch (NullPointerException | CyclicChildException ex){
 
             //add to model error message for print? Doesn't show
-            System.out.println(npe.getMessage());
-            model.addAttribute(ERR_MSG,npe.getMessage());
+            System.out.println(ex.getMessage());
+            model.addAttribute(ERR_MSG,ex.getMessage());
 
             return "redirect:/admin/{id}/edit";
-        }
+
+        } //add to model error message for print?
+
         return "redirect:/admin/home";
     }
 
@@ -117,30 +121,5 @@ public class HomeController {
         employeeService.deleteById(id);
         return "redirect:/admin/home";
     }
-
-
-
-
-
-    //POST of /user/home
-    //Handles the submitted form
-
-//    @PostMapping(value = "/user/home")
-//    public String postUserProfile(Model model,
-//                                  @ModelAttribute(LOGGED_USER_ATTR) UserModel userForm) {
-//
-//        userForm.setRole(RoleType.USER);    //since we only have USER
-//
-//        model.addAttribute(LOGGED_USER_ATTR, userForm);
-//        model.addAttribute(LOGGED_USER_NAME, userForm.getName());
-//        model.addAttribute(LOGGED_USER_ROLE, userForm.getRole().name());
-//
-//
-//        //updates user data
-//        employeeService.updateUser(userForm);
-//        return "redirect:/user/home";
-//    }
-
-
 
 }

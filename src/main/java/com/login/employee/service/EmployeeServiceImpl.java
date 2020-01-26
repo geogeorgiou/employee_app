@@ -2,6 +2,7 @@ package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
 import com.login.employee.enums.RoleType;
+import com.login.employee.exception.CyclicChildException;
 import com.login.employee.mapper.EmployeeModelToEmployee;
 import com.login.employee.mapper.EmployeeToEmployeeModel;
 import com.login.employee.model.EmployeeModel;
@@ -69,7 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //AUTO GENERATED
     @Override
-    public Employee updateEmployee(EmployeeModel empModel) throws NullPointerException {
+    public Employee updateEmployee(EmployeeModel empModel) throws NullPointerException,CyclicChildException {
 
         String empId = empModel.getId();
         String superId = empModel.getSupervisor();
@@ -87,24 +88,28 @@ public class EmployeeServiceImpl implements EmployeeService {
             return userRepo.save(emp);
         }
 
+        //supervision cases
+
         Optional<Employee> foundSupervisor = userRepo.findById(superId);
-
-//        emp.setSupervisor(foundSupervisor != null  ); //readonly
-
-
 
         if (foundSupervisor.isPresent()){
 
+            //case 1
             //cannot have as supervisor himself!
-            if (superId.equals(empId)){
-                //throws error cyclic relation error
-                System.out.println("cyclic relation error!");
+
+            //case 2
+            //has supervisor as descendant
+            //check if superId exists in empId subordinates
+            //exception doesn't check if parent is at lower level of hierarchy to child
+            //that means we can set a low-tier parent and instantly demote an employee
+
+            if (superId.equals(empId) || existsInSubordinateSet(empId,superId)){
+                //throws error cyclic reference exception
+//                throw new CyclicChildException("Cyclic child-parent reference between " + empId + " and "+superId);
+                throw new CyclicChildException(empId,superId);
             }
 
-            //cannot have as supervisor one of his descendants
-            if (!existsInSubordinateSet(empId)){
 
-            }
 
 
         } else {
@@ -115,20 +120,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         }
 
-
+        //reach this code only if pass all cases of exceptions
+        emp.setSupervisor(foundSupervisor.get());
         return userRepo.save(emp);
     }
 
-    public boolean existsInSubordinateSet(String empId){
+    public boolean existsInSubordinateSet(String empId,String superId){
         Set<Employee> employeeSet = userRepo.findSubBySupervisorId(empId);
 
         Iterator<Employee> it = employeeSet.iterator();
         boolean exists = false;
 
         while (it.hasNext()){
-            if (it.next().getId().equals(empId)){
+            if (it.next().getId().equals(superId)){
                 //throw exception supervisor is a descendant!
-                System.out.println("supervisor is a descendant!");
+//                System.out.println("supervisor is a descendant!");
                 exists = true;
             }
         }

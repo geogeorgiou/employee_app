@@ -1,6 +1,7 @@
 package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
+import com.login.employee.exception.CyclicChildException;
 import com.login.employee.model.EmployeeModel;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface EmployeeService {
 
     //UPDATE
 
-    Employee updateEmployee(EmployeeModel empModel);
+    Employee updateEmployee(EmployeeModel empModel) throws CyclicChildException;
 
     //CREATE
 
