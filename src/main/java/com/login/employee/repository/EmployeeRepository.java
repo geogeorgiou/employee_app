@@ -30,6 +30,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
             "on emp.EMP_Supervisor = sub.EMP_ID " +
             ") " +
             "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire,email,password,role from sub",nativeQuery = true)
-    Set<Employee> findSubBySupervisorId(@Param("superId") String id);
+    List<Employee> findSubBySupervisorId(@Param("superId") String id);
 
 }

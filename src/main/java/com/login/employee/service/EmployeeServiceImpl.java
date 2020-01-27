@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,12 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeToEmployeeModel employeeModelMapper;
 
-    @Autowired
-    private EmployeeModelToEmployee employeeMapper;
-
-    //BCrypt encoder for password encryption
-    @Autowired
-    private PasswordEncoder encoder;
+//    @Autowired
+//    private EmployeeModelToEmployee employeeMapper;
+//
+//    //BCrypt encoder for password encryption
+//    @Autowired
+//    private PasswordEncoder encoder;
 
     //SEARCH
 
@@ -87,7 +84,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public boolean existsInSubordinateSet(String empId,String superId){
-        Set<Employee> employeeSet = userRepo.findSubBySupervisorId(empId);
+        List<Employee> employeeSet = userRepo.findSubBySupervisorId(empId);
 
         Iterator<Employee> it = employeeSet.iterator();
         boolean exists = false;
@@ -177,17 +174,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         //NEEDS SOME WORK
         //maybe refactor work to list?
         //delete by Id deletes all Subordinates
-        Set<Employee> employeeSet = userRepo.findSubBySupervisorId(id);
+        List<Employee> employeeList = userRepo.findSubBySupervisorId(id);
 
-        Iterator<Employee> it = employeeSet.iterator();
+        Collections.reverse(employeeList);
 
-        int i=1;
-        while (it.hasNext()){
-            System.out.println(i+"->{"+it.next().getId()+"}");
-            userRepo.deleteById(it.next().getId());
-            i++;
+        for (Employee emp : employeeList) {
+            userRepo.deleteById(emp.getId());
         }
-
 
         userRepo.deleteById(id);
     }
