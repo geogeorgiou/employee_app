@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 /*some styling for error at form*/
 form {
     border-radius: 5px;
@@ -14,6 +16,23 @@ input.error, input.error:focus{
 label.error{
     color: red;
     font-size: 14px;
+}
+
+html, body {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 16px;
+}
+
+html {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+p {
+    color: #fff;
+    font-size: 24px;
+    letter-spacing: .2px;
+    margin: 0;
 }
 
 /*valid input*/
