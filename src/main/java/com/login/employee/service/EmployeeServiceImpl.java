@@ -131,10 +131,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setSupervisor(getEmployeeSupervisor(empId,superId));
     }
 
+    //code to get Employee supervisor according to different scenarios
     public Employee getEmployeeSupervisor(String empId,String superId) throws NullPointerException,CyclicChildException{
-//        String superId = empModel.getSupervisor();
 
-        //check for null cases (null,""," ") in superId (wanted no supervision)
+        //check for null cases (null,""," ") in superId (no supervision)
         if (superId.isBlank())
             return null;
 
@@ -173,6 +173,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteById(String id) {
+
+        //NEEDS SOME WORK
+        //delete by Id deletes all Subordinates
+        Set<Employee> employeeSet = userRepo.findSubBySupervisorId(id);
+
+        Iterator<Employee> it = employeeSet.iterator();
+
+        while (it.hasNext()){
+            userRepo.deleteById(it.next().getId());
+        }
+
+
         userRepo.deleteById(id);
     }
 
