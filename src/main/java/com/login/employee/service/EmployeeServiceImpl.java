@@ -1,20 +1,19 @@
 package com.login.employee.service;
 
 import com.login.employee.domain.Employee;
-import com.login.employee.enums.RoleType;
 import com.login.employee.exception.CyclicChildException;
-import com.login.employee.mapper.EmployeeModelToEmployee;
 import com.login.employee.mapper.EmployeeToEmployeeModel;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,13 +27,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeToEmployeeModel employeeModelMapper;
 
-//    @Autowired
-//    private EmployeeModelToEmployee employeeMapper;
-//
-//    //BCrypt encoder for password encryption
-//    @Autowired
-//    private PasswordEncoder encoder;
-
     //SEARCH
 
     //using Repository that extends JPA to find User By Email
@@ -45,14 +37,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeModel findById(String id) {
         Optional<Employee> employee = userRepo.findById(id);
 
-        return employeeModelMapper.ToEmployeeModel(employee.get());
-    }
-
-    @Override
-    public EmployeeModel findByEmail(String email){
-
-        //needs some exception handling here if exists etc
-        Optional<Employee> employee = userRepo.findByEmail(email);
         return employeeModelMapper.ToEmployeeModel(employee.get());
     }
 
@@ -185,23 +169,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         userRepo.deleteById(id);
     }
 
-    @Override
-    public Employee createUser(EmployeeModel empModel) {
-        Employee employee = new Employee();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        employee.setId(empModel.getId());
-        //exists? not himself?
-        employee.setSupervisor(userRepo.findById(empModel.getSupervisor()).get());
-        employee.setName(empModel.getName());
-        employee.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
-
-//        employee.setEmail("");
-//        employee.setRole(RoleType.ADMIN);
-//        employee.setPassword("");
-
-        return userRepo.save(employee);
-
-    }
 
 }

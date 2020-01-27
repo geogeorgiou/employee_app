@@ -2,11 +2,14 @@ package com.login.employee.controller.home;
 
 
 import com.login.employee.domain.Employee;
+import com.login.employee.domain.LoginUser;
 import com.login.employee.exception.CyclicChildException;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
+import com.login.employee.model.LoginUserModel;
 import com.login.employee.repository.EmployeeRepository;
 import com.login.employee.service.EmployeeService;
+import com.login.employee.service.LoginUserService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
@@ -42,23 +45,23 @@ public class HomeController {
     @Autowired
     private EmployeeService employeeService;
 
-    //DELETE AFTERWARDS!
     @Autowired
-    private EmployeeRepository REPO;
+    private LoginUserService loginService;
+
 
     //GET of /user/home
 
     @GetMapping(value = "/home")
-    public String getUserProfile(Model model) {
+    public String getUserHome(Model model) {
 
         //Handle details of currently authenticated user
 
         SecurityContext contextHolder = SecurityContextHolder.getContext();
         LoginResponse loginResponse = (LoginResponse) contextHolder.getAuthentication().getPrincipal();
 
-        Employee loginUser = loginResponse.getLoginUser();
+        LoginUser loginUser = loginResponse.getLoginUser();
 
-        EmployeeModel userModel = employeeService.findByEmail(loginUser.getEmail());
+        LoginUserModel userModel = loginService.findByEmail(loginUser.getEmail());
 
         //Assign variables to model in order to show data on /user/home
 
@@ -67,7 +70,7 @@ public class HomeController {
         model.addAttribute(EMPLOYEES_LIST, employeeModels);
 
         model.addAttribute(LOGGED_USER_ATTR, userModel);
-        model.addAttribute(LOGGED_USER_NAME, loginUser.getName());
+        model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
 
         return "pages/userHome";

@@ -12,8 +12,6 @@ public interface EmployeeService {
     //SEARCH
     EmployeeModel findById(String id);
 
-    EmployeeModel findByEmail(String email);
-
     List<EmployeeModel> findAll();
 
     //UPDATE
@@ -23,8 +21,6 @@ public interface EmployeeService {
     //CREATE
 
     Employee createEmployee(EmployeeModel empModel) throws CyclicChildException;
-
-    Employee createUser(EmployeeModel employeeModel);
 
     //DELETE
 

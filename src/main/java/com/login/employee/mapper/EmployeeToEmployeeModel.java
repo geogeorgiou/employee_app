@@ -25,11 +25,6 @@ public class EmployeeToEmployeeModel {
         empModel.setDateOfHire(dateTimeFormatter.format(emp.getDateOfHire())); //maybe needs formatter
         empModel.setSupervisor(emp.getSupervisor() != null ? emp.getSupervisor().getId() : "n/a"); //check for nullability
 
-        //assign login related variables useless here?
-        empModel.setEmail(emp.getEmail());
-        empModel.setPassword(emp.getPassword());
-        empModel.setRole(emp.getRole() != null ? emp.getRole() : RoleType.USER); //USER IS THE DEFAULT OPTION
-
         return empModel;
 
     }

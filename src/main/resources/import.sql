@@ -1,12 +1,17 @@
 -- ALL DATA ARE IMPORTED HERE
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Greg','greg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','ADMIN');
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Oleg','oleg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Pete','pete@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Paul','paul@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Aura','auraz@test.com','$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO LoginUser (logname,email,password,role) VALUES ('Phil','phil@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
 
-
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('82D58D49-72A2-42B0-A250-471E5C10D7D9', 'Greg', CURDATE(), null , 'greg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','ADMIN');
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('8CEE7A83-A9EB-4170-B7E8-5D4F0440C074', 'Oleg', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9','oleg@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('561E2D88-A747-460F-99E1-CFB1D3D8CA5C', 'Pete', CURDATE(), '8CEE7A83-A9EB-4170-B7E8-5D4F0440C074', 'pete@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('28106345-435B-4215-AECF-7C226C071E11', 'Paul', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9', 'paul@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('7012F5C7-33AD-4839-A092-4FA6E1448A5D', 'Aura', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9', 'auraz@test.com','$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
-INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor, email, password, role) VALUES ('2E3074E7-8FFB-4C5F-83AE-962812F93D08', 'Phil', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9', 'phil@test.com', '$2a$10$dwF44b7vyxH0qKY2Q5Bi1ulVUwjxv9L5UmEgBKfcCU9WtpqXwjsy.','USER');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('82D58D49-72A2-42B0-A250-471E5C10D7D9', 'Greg', CURDATE(), null);
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('8CEE7A83-A9EB-4170-B7E8-5D4F0440C074', 'Oleg', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('561E2D88-A747-460F-99E1-CFB1D3D8CA5C', 'Pete', CURDATE(), '8CEE7A83-A9EB-4170-B7E8-5D4F0440C074');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('28106345-435B-4215-AECF-7C226C071E11', 'Paul', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('7012F5C7-33AD-4839-A092-4FA6E1448A5D', 'Aura', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9');
+INSERT INTO Employee (EMP_ID, EMP_Name, EMP_Date_Of_Hire, EMP_Supervisor) VALUES ('2E3074E7-8FFB-4C5F-83AE-962812F93D08', 'Phil', CURDATE(), '82D58D49-72A2-42B0-A250-471E5C10D7D9');
 
 
 insert into Attribute (ATTR_ID,ATTR_Name,ATTR_Value) values ('3C86A592-823B-4B83-952F-F437D08F2EA8', 'Height', 'Tall');

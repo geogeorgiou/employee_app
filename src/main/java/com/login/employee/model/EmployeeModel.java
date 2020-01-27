@@ -1,7 +1,5 @@
 package com.login.employee.model;
 
-import com.login.employee.enums.RoleType;
-
 //necessary functional for ftl to display
 public class EmployeeModel {
 
@@ -14,11 +12,7 @@ public class EmployeeModel {
 
     private String supervisor;
 
-    private String email;
 
-    private String password;
-
-    private RoleType role;
 
     public EmployeeModel() {
     }
@@ -55,27 +49,5 @@ public class EmployeeModel {
         this.supervisor = supervisor;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public RoleType getRole() {
-        return role;
-    }
-
-    public void setRole(RoleType role) {
-        this.role = role;
-    }
 }
