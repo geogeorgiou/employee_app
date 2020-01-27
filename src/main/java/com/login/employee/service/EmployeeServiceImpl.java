@@ -175,13 +175,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteById(String id) {
 
         //NEEDS SOME WORK
+        //maybe refactor work to list?
         //delete by Id deletes all Subordinates
         Set<Employee> employeeSet = userRepo.findSubBySupervisorId(id);
 
         Iterator<Employee> it = employeeSet.iterator();
 
+        int i=1;
         while (it.hasNext()){
+            System.out.println(i+"->{"+it.next().getId()+"}");
             userRepo.deleteById(it.next().getId());
+            i++;
         }
 
 
