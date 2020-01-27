@@ -32,7 +32,7 @@
 
     <#--    username div with necessary name value for Security-->
     <div class="mb-3">
-        <div class="login_span"><span data-feather="user"></span> username</div>
+        <div class="login_span"><span data-feather="user" class="login_icon"></span>username</div>
 
         <label for="username" class="sr-only">Email</label>
         <input type="email" name="username" id="username" class="form-control" required >
@@ -44,7 +44,7 @@
     <#--    password div with necessary name value for Security-->
 
     <div class="mb-3">
-        <div class="login_span"><span data-feather="lock"></span> password</div>
+        <div class="login_span"><span data-feather="lock" class="login_icon"></span>password</div>
 
         <label for="password" class="sr-only">Password</label>
         <input type="password" name="password" id="password" class="form-control" required>
@@ -55,16 +55,14 @@
 
 <#--    error message when invalid credentials are inserted-->
     <#if hasError>
-        <div class="login_error">
-            <p>
-                <span data-feather="alert-octagon"></span> Invalid username and/or password!
-            </p>
+        <div class="alert alert-danger login_error" role="alert">
+             <p><span data-feather="alert-octagon" class="login_icon"></span>Invalid username or password!</p>
         </div>
     </#if>
 
 <#--    submit btn-->
     <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">
-        Login
+        Login<span data-feather="log-in" class="align-middle login_icon"></span>
     </button>
 
 <#--    anchor link to register page-->

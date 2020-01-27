@@ -14,14 +14,14 @@
         <#if employees??>
             <#list employees as emp>
                 <tr data-id="${emp.id}">
-                    <td><a href="/admin/${emp.id}/edit">${emp.id}</a></td>
-                    <td>${emp.dateOfHire}</td>
-                    <td class="text-center">${emp.name}</td>
-                    <td class="text-center">${emp.supervisor}</td>
+                    <td class="align-middle"><a href="/admin/${emp.id}/edit">${emp.id}</a></td>
+                    <td class="align-middle">${emp.dateOfHire}</td>
+                    <td class="text-center align-middle">${emp.name}</td>
+                    <td class="text-center align-middle">${emp.supervisor}</td>
 
-                    <td class="text-center"><a class="btn btn-link" href="/admin/${emp.id}/edit"><span
+                    <td class="text-center align-middle"><a class="btn btn-link" href="/admin/${emp.id}/edit"><span
                                     data-feather="tool"></span></a></td>
-                    <td class="text-center">
+                    <td class="text-center align-middle">
 
                         <button
                                 class="btn btn-link"
