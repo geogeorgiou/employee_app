@@ -4,70 +4,52 @@
 
 // used in /user/home + /register
 
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+    return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Enter letters only!");
+
 jQuery(function ($){
 
-    const userValidator = $('#userValidator');
+    const empValidator = $('#employeeForm');
 
-    if (userValidator.validate) {
-        userValidator.validate({
+    if (empValidator.validate) {
+        empValidator.validate({
             rules: {
 
-                firstName: {
+                id: {
                     required: true
                 },
-                lastName: {
+                name: {
+                    required: true,
+                    lettersonly: true
+                },
+                dateOfHire: {
                     required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
+                }
+                // ,
 
-                password:{
-                    required: true,
-                    minlength: 8
-                },
+                // supervisor:{
+                //     required: true
+                // },
 
 
-                confirm_password:{
-                    required: true,
-                    minlength: 8,
-                    equalTo: "#password"
-                },
-
-                phoneNumber: {
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 10
-                },
 
             },
             messages: {
 
-                email: {
-                    required: 'Enter your email! 📧',
+                id: {
+                    required: 'Enter id!',
                 },
-                firstName: {
-                    required: 'Enter your first name'
+                name: {
+                    required: 'Enter employee name!'
                 },
-                lastName: {
-                    required: 'Enter your last name'
-                },
-                password: {
-                    required: 'Enter your password',
-                    minlength: 'Password should be more than 8 characters',
-                },
-
-                confirm_password:{
-                    required: 'Re-enter password',
-                    minlength: 'Password should be more than 8 characters',
-                    equalTo: 'Please enter the same password'
-                },
-                phoneNumber: {
-                    minlength: 'Phone number should be 10 digits',
-                    maxlength: 'Phone number should be 10 digits',
-                    digits: 'Phone number should contain only digits'
-                },
+                dateOfHire: {
+                    required: 'Enter hire date!'
+                }
+                // ,
+                // supervisor: {
+                //     required: 'Enter supervisor!'
+                // }
 
             }
         });

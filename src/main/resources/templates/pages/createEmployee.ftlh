@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +20,6 @@
 <script>
     feather.replace();
 </script>
-<#--<script src="/js/validator.js"></script>-->
+<script src="/js/validator.js"></script>
 </body>
 </html>

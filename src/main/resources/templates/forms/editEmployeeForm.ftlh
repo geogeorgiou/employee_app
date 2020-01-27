@@ -1,4 +1,5 @@
-<form class="needs-validation" novalidate action="/admin/${employee.id}/edit" id="editEmployeeForm" method="POST" >
+
+<form class="needs-validation" novalidate action="/admin/${employee.id}/edit" id="employeeForm" method="POST" >
 
 <#--    action="/admin/${employee.id}"-->
 <#--    onsubmit="return isValidEmployee();"-->
@@ -36,15 +37,6 @@
         </div>
         <br><br><br>
     </div>
-
-
-<#--    <#if errMsg??>-->
-<#--        <div>-->
-<#--            <p id="pError" style="color:red;">-->
-<#--                ${errMsg}-->
-<#--            </p>-->
-<#--        </div>-->
-<#--    </#if>-->
 
     <#if errMsg??>
         <div>

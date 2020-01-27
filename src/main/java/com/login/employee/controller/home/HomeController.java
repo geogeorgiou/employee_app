@@ -73,7 +73,8 @@ public class HomeController {
     }
 
     @GetMapping(value = "/{id}/edit")
-    public String getEditEmployee(@PathVariable String id,Model model){
+    public String getEditEmployee(@PathVariable String id,
+                                  Model model){
 
         EmployeeModel employeeModel = employeeService.findById(id);
 
@@ -83,7 +84,8 @@ public class HomeController {
     }
 
     @PostMapping(value = "/{id}/edit")
-    public String doEditEmployee(EmployeeModel employeeModel,Model model) {
+    public String doEditEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel,
+                                 Model model) {
 
         try{
 
