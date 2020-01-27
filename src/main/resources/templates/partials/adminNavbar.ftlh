@@ -7,7 +7,10 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
 
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/logout">
+                <span data-feather="log-out"></span>
+                Logout
+            </a>
 
         </li>
     </ul>
@@ -27,7 +30,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/create">
-                            <span data-feather="search"></span>
+                            <span data-feather="plus-circle"></span>
                             Create Employee
                         </a>
                     </li>

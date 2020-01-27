@@ -55,8 +55,7 @@
     };
 </script>
 
-<#--scripts for validation of input fields + password-->
-<#--<script src="js/passValidator.js"></script>-->
+<#--scripts for validation of input fields-->
 <script src="js/validator.js"></script>
 
 </body>

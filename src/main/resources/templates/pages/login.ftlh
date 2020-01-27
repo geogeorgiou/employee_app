@@ -29,11 +29,11 @@
     </svg>
 
     <#--    login prompt-->
-    <h1 class="h3 mb-3 font-weight-normal">Please login</h1>
+<#--    <h1 class="h3 mb-3 font-weight-normal">Login</h1>-->
 
     <#--    username div with necessary name value for Security-->
     <div class="mb-3">
-        <label for="username" class="sr-only">Email address</label>
+        <label for="username" class="sr-only">Email</label>
         <input type="email" name="username" id="username" class="form-control" placeholder="Email address"  value="" required >
         <div class="invalid-feedback">
             Valid email is required.

@@ -26,13 +26,6 @@ jQuery(function ($){
                 dateOfHire: {
                     required: true
                 }
-                // ,
-
-                // supervisor:{
-                //     required: true
-                // },
-
-
 
             },
             messages: {
@@ -46,14 +39,18 @@ jQuery(function ($){
                 dateOfHire: {
                     required: 'Enter hire date!'
                 }
-                // ,
-                // supervisor: {
-                //     required: 'Enter supervisor!'
-                // }
 
             }
         });
     }
+
+    $('#modal').on('show.bs.modal', function (event) {
+        const id = event.relatedTarget.dataset.id;
+        $('#deleteForm').attr('action', `/admin/${id}/delete`);
+        $('.modal-title').text(function () {
+            return `Employee #${id}`;
+        });
+    });
 
 
 });

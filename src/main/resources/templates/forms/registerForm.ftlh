@@ -84,7 +84,7 @@
         <div class="row">
             <button class="btn btn-success btn-lg mt-4" type="submit">Register</button>&nbsp&nbsp&nbsp
 
-            <button class="btn btn-danger btn-lg mt-4" type="submit" id="cancelBtn">Cancel</button>&nbsp&nbsp&nbsp
+            <button class="btn btn-danger btn-lg mt-4" type="submit" id="cancelBtn"><span class="glyphicon glyphicon-remove"></span>Cancel</button>&nbsp&nbsp&nbsp
         </div>
     </div>
 </form>
