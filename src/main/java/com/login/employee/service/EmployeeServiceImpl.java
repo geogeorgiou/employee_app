@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeModel findById(String id) {
         Optional<Employee> employee = userRepo.findById(id);
 
-        return employeeModelMapper.ToEmployeeModel(employee.get());
+        return employeeModelMapper.toEmployeeModel(employee.get());
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return userRepo
                 .findAll()
                 .stream()
-                .map(employee -> employeeModelMapper.ToEmployeeModel(employee))
+                .map(employee -> employeeModelMapper.toEmployeeModel(employee))
                 .collect(Collectors.toList());
     }
 

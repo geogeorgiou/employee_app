@@ -16,7 +16,7 @@ public class EmployeeModelToEmployee {
     @Autowired
     private EmployeeRepository empRepo;
 
-    public Employee ToEmployee(EmployeeModel empModel){
+    public Employee toEmployee(EmployeeModel empModel){
         Employee emp = new Employee();
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -14,7 +14,7 @@ public class EmployeeToEmployeeModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
-    public EmployeeModel ToEmployeeModel(Employee emp){
+    public EmployeeModel toEmployeeModel(Employee emp){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
