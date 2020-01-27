@@ -73,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployee(EmployeeModel empModel) throws NullPointerException,CyclicChildException {
 
         String empId = empModel.getId();
-        String superId = empModel.getSupervisor();
+
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Employee emp = userRepo.findById(empId).get();
@@ -82,46 +82,51 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setName(empModel.getName());
         emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
 
-        //check for null cases (null,""," ") in superId (wanted no supervision)
-        if (superId.isBlank()){
-            emp.setSupervisor(null); //assign null employee
-            return userRepo.save(emp);
-        }
+        String superId = empModel.getSupervisor();
+        emp.setSupervisor(getEmployeeSupervisor(empId,superId));
 
-        //supervision cases
-
-        Optional<Employee> foundSupervisor = userRepo.findById(superId);
-
-        if (foundSupervisor.isPresent()){
-
-            //case 1
-            //cannot have as supervisor himself!
-
-            //case 2
-            //has supervisor as descendant
-            //check if superId exists in empId subordinates
-            //exception doesn't check if parent is at lower level of hierarchy to child
-            //that means we can set a low-tier parent and instantly demote an employee
-
-            if (superId.equals(empId) || existsInSubordinateSet(empId,superId)){
-                //throws error cyclic reference exception
-//                throw new CyclicChildException("Cyclic child-parent reference between " + empId + " and "+superId);
-                throw new CyclicChildException(empId,superId);
-            }
-
-
-
-
-        } else {
-            //cannot find supervisor?
-            //throw null pointer exception!
-//            System.out.println("No such supervisor Id");
-            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
-
-        }
-
-        //reach this code only if pass all cases of exceptions
-        emp.setSupervisor(foundSupervisor.get());
+//        String superId = empModel.getSupervisor();
+//
+//        //check for null cases (null,""," ") in superId (wanted no supervision)
+//        if (superId.isBlank()){
+//            emp.setSupervisor(null); //assign null employee
+//            return userRepo.save(emp);
+//        }
+//
+//        //supervision cases
+//
+//        Optional<Employee> foundSupervisor = userRepo.findById(superId);
+//
+//        if (foundSupervisor.isPresent()){
+//
+//            //case 1
+//            //cannot have as supervisor himself!
+//
+//            //case 2
+//            //has supervisor as descendant
+//            //check if superId exists in empId subordinates
+//            //exception doesn't check if parent is at lower level of hierarchy to child
+//            //that means we can set a low-tier parent and instantly demote an employee
+//
+//            if (superId.equals(empId) || existsInSubordinateSet(empId,superId)){
+//                //throws error cyclic reference exception
+////                throw new CyclicChildException("Cyclic child-parent reference between " + empId + " and "+superId);
+//                throw new CyclicChildException(empId,superId);
+//            }
+//
+//
+//
+//
+//        } else {
+//            //cannot find supervisor?
+//            //throw null pointer exception!
+////            System.out.println("No such supervisor Id");
+//            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
+//
+//        }
+//
+//        //reach this code only if pass all cases of exceptions
+//        emp.setSupervisor(foundSupervisor.get());
         return userRepo.save(emp);
     }
 
@@ -132,11 +137,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         boolean exists = false;
 
         while (it.hasNext()){
-            if (it.next().getId().equals(superId)){
-                //throw exception supervisor is a descendant!
-//                System.out.println("supervisor is a descendant!");
+            if (it.next().getId().equals(superId))
                 exists = true;
-            }
         }
 
         return exists;
@@ -157,78 +159,51 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        employee.setRole(RoleType.ADMIN);
 //        employee.setPassword("");
 
+
+
+
         return userRepo.save(employee);
 
     }
 
+    public Employee getEmployeeSupervisor(String empId,String superId) throws NullPointerException,CyclicChildException{
+//        String superId = empModel.getSupervisor();
 
+        //check for null cases (null,""," ") in superId (wanted no supervision)
+        if (superId.isBlank())
+            return null;
 
-    //UPDATE
+        //supervision cases
 
-    //update user data according to UserModel data
-//    @Override
-//    public LoginUser updateUser(UserModel userModel) {
-//
-//        //assign email to variable
-//        String updatedEmail = userModel.getEmail();
-//
-//        //find User using Repository
-//        //will not throw exception on duplicate mail because it will be a readonly field
-//        LoginUser loginUser = userRepo.findByEmail(updatedEmail).get();
-//
-//        //assign variables to updatedUser
-//        loginUser.setEmail(updatedEmail);
-//        loginUser.setCompany(userModel.getCompany());
-//        loginUser.setFirstName(userModel.getFirstName());
-//        loginUser.setLastName(userModel.getLastName());
-//        loginUser.setPhoneNumber(userModel.getPhoneNumber());
-//        loginUser.setRole(userModel.getRole());
-//
-//        //ONLY ENCRYPT PASSWORD IF USER CHANGED IT
-//        //otherwise it will encrypt the encrypted password (unwanted behaviour)
-//        if (!(loginUser.getPassword().equals(userModel.getPassword()))) {
-//
-//            loginUser.setPassword(encoder.encode(userModel.getPassword()));
-//
-//        } else {
-//
-//            loginUser.setPassword(userModel.getPassword());
-//
-//        }
-//
-//        return userRepo.save(loginUser);
-//    }
+        Optional<Employee> foundSupervisor = userRepo.findById(superId);
 
-    //CREATE
-    //creates user
+        if (foundSupervisor.isPresent()){
 
-//    @Override
-//    public LoginUser createUser(UserModel userModel) throws DuplicateEmailException{
-//
-//        //assign mail to variable
-//        String email = userModel.getEmail();
-//
-//        //find User using Repository
-//        Optional<LoginUser> optionalLoginUser = userRepo.findByEmail(email);
-//
-//        //throws exception if duplicate mail is find in DB
-//        if (!optionalLoginUser.isEmpty())
-//            throw new DuplicateEmailException(email);
-//
-//        //assign variables
-//        LoginUser loginUser = new LoginUser();
-//        loginUser.setEmail(email);
-//        loginUser.setFirstName(userModel.getFirstName());
-//        loginUser.setLastName(userModel.getLastName());
-//        loginUser.setCompany(userModel.getCompany());
-//        loginUser.setPhoneNumber(userModel.getPhoneNumber());
-//        loginUser.setRole(userModel.getRole());
-//
-//
-//        //encrypt password before create
-//        loginUser.setPassword(encoder.encode(userModel.getPassword()));
-//        return userRepo.save(loginUser);
-//    }
+            //case 1
+            //cannot have as supervisor himself!
+
+            //case 2
+            //has supervisor as descendant
+            //check if superId exists in empId subordinates
+            //exception doesn't check if parent is at lower level of hierarchy to child
+            //that means we can set a low-tier parent and instantly demote an employee
+
+            if (superId.equals(empId) || existsInSubordinateSet(empId,superId)){
+                //throws error cyclic reference exception
+                throw new CyclicChildException(empId,superId);
+            }
+
+        } else {
+            //cannot find supervisor?
+            //throw null pointer exception!
+            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
+
+        }
+
+        //reach this code only if pass all cases of exceptions
+
+        return foundSupervisor.get();
+    }
 
 
     @Override
