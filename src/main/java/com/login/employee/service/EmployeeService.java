@@ -22,7 +22,9 @@ public interface EmployeeService {
 
     //CREATE
 
-    Employee createEmployee(EmployeeModel empModel);
+    Employee createEmployee(EmployeeModel empModel) throws CyclicChildException;
+
+    Employee createUser(EmployeeModel employeeModel);
 
     //DELETE
 

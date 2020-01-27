@@ -34,5 +34,14 @@
         </div>
         <br><br><br>
     </div>
+
+    <#if errMsg??>
+        <div>
+            <p style="color:red;">
+                ${errMsg}
+            </p>
+        </div>
+    </#if>
+
 </form>
 

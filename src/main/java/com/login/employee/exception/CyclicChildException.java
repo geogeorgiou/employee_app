@@ -7,6 +7,6 @@ public class CyclicChildException extends Exception {
     }
 
     public CyclicChildException(String child, String parent){
-        super("Cyclic child-parent reference between " + child + " and "+parent);
+        super("Cyclic child-parent reference between {" + child + "} and {"+parent+"}");
     }
 }

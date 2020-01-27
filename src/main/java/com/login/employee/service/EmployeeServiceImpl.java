@@ -74,59 +74,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         String empId = empModel.getId();
 
+        Optional<Employee> optionalEmployee = userRepo.findById(empId);
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Employee emp = userRepo.findById(empId).get();
+        if (!optionalEmployee.isPresent())
+            throw new NullPointerException("Employee with id={"+empId+"} doesn't exist!");
 
-        emp.setId(empId); //readonly
-        emp.setName(empModel.getName());
-        emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
+        Employee emp = optionalEmployee.get();
 
-        String superId = empModel.getSupervisor();
-        emp.setSupervisor(getEmployeeSupervisor(empId,superId));
+        setEmployeeVars(emp,empModel);
 
-//        String superId = empModel.getSupervisor();
-//
-//        //check for null cases (null,""," ") in superId (wanted no supervision)
-//        if (superId.isBlank()){
-//            emp.setSupervisor(null); //assign null employee
-//            return userRepo.save(emp);
-//        }
-//
-//        //supervision cases
-//
-//        Optional<Employee> foundSupervisor = userRepo.findById(superId);
-//
-//        if (foundSupervisor.isPresent()){
-//
-//            //case 1
-//            //cannot have as supervisor himself!
-//
-//            //case 2
-//            //has supervisor as descendant
-//            //check if superId exists in empId subordinates
-//            //exception doesn't check if parent is at lower level of hierarchy to child
-//            //that means we can set a low-tier parent and instantly demote an employee
-//
-//            if (superId.equals(empId) || existsInSubordinateSet(empId,superId)){
-//                //throws error cyclic reference exception
-////                throw new CyclicChildException("Cyclic child-parent reference between " + empId + " and "+superId);
-//                throw new CyclicChildException(empId,superId);
-//            }
-//
-//
-//
-//
-//        } else {
-//            //cannot find supervisor?
-//            //throw null pointer exception!
-////            System.out.println("No such supervisor Id");
-//            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
-//
-//        }
-//
-//        //reach this code only if pass all cases of exceptions
-//        emp.setSupervisor(foundSupervisor.get());
         return userRepo.save(emp);
     }
 
@@ -145,25 +101,34 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee createEmployee(EmployeeModel empModel) {
-        Employee employee = new Employee();
+    public Employee createEmployee(EmployeeModel empModel) throws NullPointerException,CyclicChildException{
+        Employee emp = new Employee();
+
+        String empId = empModel.getId();
+
+        Optional<Employee> optionalEmployee = userRepo.findById(empId);
+
+        if (optionalEmployee.isPresent())
+            throw new NullPointerException("Employee with id={"+empId+"} already exists!");
+
+        setEmployeeVars(emp,empModel);
+
+        return userRepo.save(emp);
+    }
+
+    //common code for {CREATE},{EDIT} Employee
+    public void setEmployeeVars(Employee emp,EmployeeModel empModel) throws NullPointerException,CyclicChildException{
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        employee.setId(empModel.getId());
-        //exists? not himself?
-        employee.setSupervisor(userRepo.findById(empModel.getSupervisor()).get());
-        employee.setName(empModel.getName());
-        employee.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
+        String empId = empModel.getId();
 
-//        employee.setEmail("");
-//        employee.setRole(RoleType.ADMIN);
-//        employee.setPassword("");
+        emp.setId(empId);
+        emp.setName(empModel.getName());
+        emp.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
 
-
-
-
-        return userRepo.save(employee);
-
+        String superId = empModel.getSupervisor();
+        emp.setSupervisor(getEmployeeSupervisor(empId,superId));
     }
 
     public Employee getEmployeeSupervisor(String empId,String superId) throws NullPointerException,CyclicChildException{
@@ -196,7 +161,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             //cannot find supervisor?
             //throw null pointer exception!
-            throw new NullPointerException("Supervisor with "+superId+" id doesn't exist!");
+            throw new NullPointerException("Supervisor with id={"+superId+"} doesn't exist!");
 
         }
 
@@ -210,4 +175,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteById(String id) {
         userRepo.deleteById(id);
     }
+
+    @Override
+    public Employee createUser(EmployeeModel empModel) {
+        Employee employee = new Employee();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        employee.setId(empModel.getId());
+        //exists? not himself?
+        employee.setSupervisor(userRepo.findById(empModel.getSupervisor()).get());
+        employee.setName(empModel.getName());
+        employee.setDateOfHire(LocalDate.parse(empModel.getDateOfHire(), dateTimeFormatter));
+
+//        employee.setEmail("");
+//        employee.setRole(RoleType.ADMIN);
+//        employee.setPassword("");
+
+        return userRepo.save(employee);
+
+    }
+
 }

@@ -7,6 +7,7 @@ import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
 import com.login.employee.repository.EmployeeRepository;
 import com.login.employee.service.EmployeeService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -112,8 +113,20 @@ public class HomeController {
     }
 
     @PostMapping(value = "/create")
-    public String doCreateEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel){
-        employeeService.createEmployee(employeeModel);
+    public String doCreateEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel
+                                , Model model){
+
+        try{
+
+            employeeService.createEmployee(employeeModel);
+
+        } catch (NullPointerException | CyclicChildException ex){
+
+            //add to model error message for print? Doesn't show
+            System.out.println(ex.getMessage());
+            model.addAttribute(ERR_MSG,ex.getMessage());
+            return "pages/createEmployee";
+        }
         return "redirect:/admin/home";
     }
 
