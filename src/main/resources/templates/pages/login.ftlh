@@ -6,7 +6,6 @@
 
 <#--    using bootstrap examples for login -->
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css">
-<#--    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/checkout/form-validation.css">-->
     <link rel="stylesheet" type="text/css" href="css/login_styles.css">
 
     <title>Login</title>
@@ -33,8 +32,10 @@
 
     <#--    username div with necessary name value for Security-->
     <div class="mb-3">
+        <div class="login_span"><span data-feather="user"></span> username</div>
+
         <label for="username" class="sr-only">Email</label>
-        <input type="email" name="username" id="username" class="form-control" placeholder="Email address"  value="" required >
+        <input type="email" name="username" id="username" class="form-control" required >
         <div class="invalid-feedback">
             Valid email is required.
         </div>
@@ -43,8 +44,10 @@
     <#--    password div with necessary name value for Security-->
 
     <div class="mb-3">
+        <div class="login_span"><span data-feather="lock"></span> password</div>
+
         <label for="password" class="sr-only">Password</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Password"  value="" required>
+        <input type="password" name="password" id="password" class="form-control" required>
         <div class="invalid-feedback">
             Password is required.
         </div>
@@ -52,15 +55,17 @@
 
 <#--    error message when invalid credentials are inserted-->
     <#if hasError>
-        <div>
-            <p style="color:red;">
-                Invalid username and/or password!!!
+        <div class="login_error">
+            <p>
+                <span data-feather="alert-octagon"></span> Invalid username and/or password!
             </p>
         </div>
     </#if>
 
 <#--    submit btn-->
-    <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Login</button>
+    <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">
+        Login
+    </button>
 
 <#--    anchor link to register page-->
     <div class="register_anchor_container">

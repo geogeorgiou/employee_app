@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+/*@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');*/
 
 /*some styling for error at form*/
 form {
@@ -19,17 +19,16 @@ label.error{
 }
 
 html, body {
-    font-family: 'Roboto Mono', sans-serif;
+    /*font-family: 'Roboto Mono', sans-serif;*/
     font-size: 16px;
 }
 
 html {
     box-sizing: border-box;
-    user-select: none;
 }
 
 p {
-    color: #fff;
+    /*color: #fff;*/
     font-size: 24px;
     letter-spacing: .2px;
     margin: 0;
@@ -48,6 +47,11 @@ p {
 .emsg{
     color: red;
 }
+
+.emsg p{
+    font-size: 16px;
+}
+
 .hidden {
     visibility:hidden;
 }

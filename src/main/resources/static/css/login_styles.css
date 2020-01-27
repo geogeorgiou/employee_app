@@ -19,7 +19,21 @@
     color: #04116b;
     cursor: pointer;
     text-decoration: none;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
+
+.login_span{
+    margin-bottom: 6px;
+}
+
+.login_error{
+    background-color: #9e1b2d;
+}
+
+.login_error p{
+    color:#550f18;
+    font-size:16px;
+}
+
 
 /**************************************/

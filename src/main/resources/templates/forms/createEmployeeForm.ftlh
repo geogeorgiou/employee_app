@@ -32,12 +32,11 @@
             <button class="btn btn-primary btn-lg mt-4" type="submit" >Submit</button>&nbsp&nbsp&nbsp
             <span id="buttonAppear"></span>
         </div>
-        <br><br><br>
     </div>
-
+    <br>
     <#if errMsg??>
-        <div>
-            <p style="color:red;">
+        <div class="emsg">
+            <p>
                 ${errMsg}
             </p>
         </div>

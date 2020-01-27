@@ -1,9 +1,6 @@
 
 <form class="needs-validation" novalidate action="/admin/${employee.id}/edit" id="employeeForm" method="POST" >
 
-<#--    action="/admin/${employee.id}"-->
-<#--    onsubmit="return isValidEmployee();"-->
-
 
     <div class="row">
         <#--        no changes here i Don't want the form to be able to pass this as argument-->
@@ -37,10 +34,10 @@
         </div>
         <br><br><br>
     </div>
-
+    <br>
     <#if errMsg??>
-        <div>
-            <p style="color:red;">
+        <div class="emsg">
+            <p>
                 ${errMsg}
             </p>
         </div>

@@ -22,7 +22,6 @@
 </script>
 
 <script src="/js/validator.js"></script>
-<#--<script src="/js/validEmployee.js"></script>-->
 
 </body>
 </html>
