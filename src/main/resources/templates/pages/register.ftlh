@@ -56,7 +56,7 @@
 </script>
 
 <#--scripts for validation of input fields-->
-<script src="js/validator.js"></script>
+<script src="js/userValidator.js"></script>
 
 </body>
 </html>

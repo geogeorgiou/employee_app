@@ -3,9 +3,7 @@ package com.login.employee.controller.user;
 
 import com.login.employee.enums.RoleType;
 import com.login.employee.exception.DuplicateEmailException;
-import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginUserModel;
-import com.login.employee.service.EmployeeService;
 import com.login.employee.service.LoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,8 @@ public class RegisterController {
     private static final String LOGGED_USER_ROLE = "role";
     private static final String DUPLICATE_MAIL_MSG = "duplicateMail";
 
+    private static final String USER_ROLETYPES = "userRoles";
+
     //User Service
 
     @Autowired
@@ -42,6 +42,7 @@ public class RegisterController {
 
         //assign UserModel attribute to model to use it later
         model.addAttribute(LOGGED_USER_ATTR, new LoginUserModel());
+        model.addAttribute(USER_ROLETYPES, RoleType.values());
 
         return "pages/register";
     }
@@ -55,8 +56,6 @@ public class RegisterController {
         //when duplicate mail is inserted an error message will be show on /register
 
         try {
-
-            userForm.setRole(RoleType.USER);
 
             model.addAttribute(LOGGED_USER_ATTR, userForm);
             model.addAttribute(LOGGED_USER_NAME, userForm.getLogName());

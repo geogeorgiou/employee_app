@@ -2,10 +2,10 @@
 // with jQuery checks for "rules"
 // and returns corresponding error "messages"
 
-// used in /user/home + /register
+// used in /admin/home
 
 jQuery.validator.addMethod("lettersonly", function(value, element) {
-    return this.optional(element) || /^[a-z]+$/i.test(value);
+    return this.optional(element) || /^[a-z ]+$/i.test(value);
 }, "Enter letters only!");
 
 jQuery(function ($){
