@@ -7,7 +7,7 @@
     <title>Home page</title>
 </head>
 <body>
-<#include "../partials/adminNavbar.ftlh">
+<#include "../partials/pageNavbar.ftlh">
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
     <div class="row">
         <div class="col-md-12 order-md-1">

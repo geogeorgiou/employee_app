@@ -6,8 +6,12 @@
             <th>Hire Date</th>
             <th class="text-center">Name</th>
             <th class="text-center">Supervisor</th>
-            <th class="text-center">Edit</th>
-            <th class="text-center">Remove</th>
+
+            <#if role == "ADMIN">
+                <th class="text-center">Edit</th>
+                <th class="text-center">Remove</th>
+            </#if>
+
         </tr>
         </thead>
         <tbody>
@@ -19,20 +23,23 @@
                     <td class="text-center align-middle">${emp.name}</td>
                     <td class="text-center align-middle">${emp.supervisor}</td>
 
-                    <td class="text-center align-middle"><a class="btn btn-link" href="/admin/${emp.id}/edit"><span
-                                    data-feather="tool"></span></a></td>
-                    <td class="text-center align-middle">
+                    <#if role == "ADMIN">
+                        <td class="text-center align-middle"><a class="btn btn-link" href="/admin/${emp.id}/edit"><span
+                                        data-feather="tool"></span></a></td>
+                        <td class="text-center align-middle">
 
-                        <button
-                                class="btn btn-link"
-                                data-toggle="modal"
-                                data-target="#modal"
-                                data-id="${emp.id}"
-                        >
-                            <span data-feather="x" style="color:red"></span>
-                        </button>
+                            <button
+                                    class="btn btn-link"
+                                    data-toggle="modal"
+                                    data-target="#modal"
+                                    data-id="${emp.id}"
+                            >
+                                <span data-feather="x" style="color:red"></span>
+                            </button>
 
-                    </td>
+                        </td>
+                    </#if>
+
 
                 </tr>
             </#list>
@@ -40,6 +47,8 @@
         </tbody>
     </table>
 
-    <#include "../modal/employeDeleteModal.ftlh">
+    <#if role == "ADMIN">
+        <#include "../modal/employeDeleteModal.ftlh">
+    </#if>
 
 </div>

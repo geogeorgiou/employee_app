@@ -3,6 +3,7 @@ package com.login.employee.controller.home;
 
 import com.login.employee.domain.Employee;
 import com.login.employee.domain.LoginUser;
+import com.login.employee.enums.RoleType;
 import com.login.employee.exception.CyclicChildException;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
@@ -25,7 +26,6 @@ import java.util.Set;
 //Controller that handles /user/home
 
 @Controller
-@RequestMapping("/admin")
 public class HomeController {
 
 
@@ -51,16 +51,37 @@ public class HomeController {
 
     //GET of /user/home
 
-    @GetMapping(value = "/home")
+//    @GetMapping(value = "/admin/home")
+//    public String getUserHome(Model model) {
+//
+//        //Handle details of currently authenticated user
+//
+//        SecurityContext contextHolder = SecurityContextHolder.getContext();
+//        LoginResponse loginResponse = (LoginResponse) contextHolder.getAuthentication().getPrincipal();
+//
+//        LoginUser loginUser = loginResponse.getLoginUser();
+//
+//        LoginUserModel userModel = loginService.findByEmail(loginUser.getEmail());
+//
+//        //Assign variables to model in order to show data on /user/home
+//
+//        List<EmployeeModel> employeeModels = employeeService.findAll();
+//
+//        model.addAttribute(EMPLOYEES_LIST, employeeModels);
+//
+//        model.addAttribute(LOGGED_USER_ATTR, userModel);
+//        model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
+//        model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
+//
+//        return "pages/userHome";
+//    }
+
+    @GetMapping(value = "/user/home")
     public String getUserHome(Model model) {
-
-        //Handle details of currently authenticated user
-
         SecurityContext contextHolder = SecurityContextHolder.getContext();
         LoginResponse loginResponse = (LoginResponse) contextHolder.getAuthentication().getPrincipal();
 
         LoginUser loginUser = loginResponse.getLoginUser();
-
         LoginUserModel userModel = loginService.findByEmail(loginUser.getEmail());
 
         //Assign variables to model in order to show data on /user/home
@@ -72,11 +93,20 @@ public class HomeController {
         model.addAttribute(LOGGED_USER_ATTR, userModel);
         model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
-
         return "pages/userHome";
     }
 
-    @GetMapping(value = "/{id}/edit")
+    @GetMapping(value = "/admin/home")
+    public String getAdminHome(Model model){
+        List<EmployeeModel> employees = employeeService.findAll();
+        model.addAttribute(EMPLOYEES_LIST, employees);
+        model.addAttribute("role", RoleType.ADMIN.name());
+        return "pages/userHome";
+    }
+
+    //**************** EMPLOYEE CONTROLLER
+
+    @GetMapping(value = "/admin/{id}/edit")
     public String getEditEmployee(@PathVariable String id,
                                   Model model){
 
@@ -87,7 +117,7 @@ public class HomeController {
         return "pages/editEmployee";
     }
 
-    @PostMapping(value = "/{id}/edit")
+    @PostMapping(value = "/admin/{id}/edit")
     public String doEditEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel,
                                  Model model) {
 
@@ -109,13 +139,13 @@ public class HomeController {
         return "redirect:/admin/home";
     }
 
-    @GetMapping(value = "/create")
+    @GetMapping(value = "/admin/create")
     public String getCreateEmployee(Model model){
         model.addAttribute(EMPLOYEE_ATTR, new EmployeeModel());
         return "pages/createEmployee";
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/admin/create")
     public String doCreateEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel
                                 , Model model){
 
@@ -134,7 +164,7 @@ public class HomeController {
     }
 
 
-    @PostMapping(value = "/{id}/delete")
+    @PostMapping(value = "/admin/{id}/delete")
     public String deleteEmployee(@PathVariable String id){
         employeeService.deleteById(id);
         return "redirect:/admin/home";
