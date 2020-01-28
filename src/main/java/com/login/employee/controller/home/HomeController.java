@@ -1,17 +1,14 @@
 package com.login.employee.controller.home;
 
 
-import com.login.employee.domain.Employee;
 import com.login.employee.domain.LoginUser;
 import com.login.employee.enums.RoleType;
 import com.login.employee.exception.CyclicChildException;
 import com.login.employee.model.EmployeeModel;
 import com.login.employee.model.LoginResponse;
 import com.login.employee.model.LoginUserModel;
-import com.login.employee.repository.EmployeeRepository;
 import com.login.employee.service.EmployeeService;
 import com.login.employee.service.LoginUserService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,9 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 //Controller that handles /user/home
 
@@ -49,33 +44,6 @@ public class HomeController {
     private LoginUserService loginService;
 
 
-    //GET of /user/home
-
-//    @GetMapping(value = "/admin/home")
-//    public String getUserHome(Model model) {
-//
-//        //Handle details of currently authenticated user
-//
-//        SecurityContext contextHolder = SecurityContextHolder.getContext();
-//        LoginResponse loginResponse = (LoginResponse) contextHolder.getAuthentication().getPrincipal();
-//
-//        LoginUser loginUser = loginResponse.getLoginUser();
-//
-//        LoginUserModel userModel = loginService.findByEmail(loginUser.getEmail());
-//
-//        //Assign variables to model in order to show data on /user/home
-//
-//        List<EmployeeModel> employeeModels = employeeService.findAll();
-//
-//        model.addAttribute(EMPLOYEES_LIST, employeeModels);
-//
-//        model.addAttribute(LOGGED_USER_ATTR, userModel);
-//        model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
-//        model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
-//
-//        return "pages/userHome";
-//    }
-
     @GetMapping(value = "/user/home")
     public String getUserHome(Model model) {
         SecurityContext contextHolder = SecurityContextHolder.getContext();
@@ -93,7 +61,7 @@ public class HomeController {
         model.addAttribute(LOGGED_USER_ATTR, userModel);
         model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
-        return "pages/userHome";
+        return "pages/home";
     }
 
     @GetMapping(value = "/admin/home")
@@ -101,7 +69,7 @@ public class HomeController {
         List<EmployeeModel> employees = employeeService.findAll();
         model.addAttribute(EMPLOYEES_LIST, employees);
         model.addAttribute("role", RoleType.ADMIN.name());
-        return "pages/userHome";
+        return "pages/home";
     }
 
     //**************** EMPLOYEE CONTROLLER

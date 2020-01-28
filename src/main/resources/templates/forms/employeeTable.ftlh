@@ -2,7 +2,7 @@
     <table class="table table-striped table-sm">
         <thead>
         <tr>
-            <th>#ID</th>
+            <th>ID</th>
             <th>Hire Date</th>
             <th class="text-center">Name</th>
             <th class="text-center">Supervisor</th>
@@ -18,7 +18,7 @@
         <#if employees??>
             <#list employees as emp>
                 <tr data-id="${emp.id}">
-                    <td class="align-middle"><a href="/admin/${emp.id}/edit">${emp.id}</a></td>
+                    <td class="align-middle">${emp.id}</td>
                     <td class="align-middle">${emp.dateOfHire}</td>
                     <td class="text-center align-middle">${emp.name}</td>
                     <td class="text-center align-middle">${emp.supervisor}</td>
