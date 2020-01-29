@@ -17,6 +17,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
     Optional<Employee> findById(String id);
 
+    //recursive query (supported by MySQL 8+) that finds subordinates given supervisor ID
+
     @Query(
     value = "with recursive sub (EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire) as( " +
             "select EMP_ID,EMP_Name,EMP_Supervisor,EMP_Date_Of_Hire " +

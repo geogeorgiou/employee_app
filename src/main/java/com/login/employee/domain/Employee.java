@@ -16,8 +16,6 @@ import java.util.Set;
 public class Employee {
 
 
-    //User variables
-
     @Id
     @Column(name = "EMP_ID",nullable = false)
     private String id;
@@ -33,6 +31,8 @@ public class Employee {
     @JoinColumn(name="EMP_Supervisor")
     private Employee supervisor;
 
+    //variable that holds relation of employee and attribute via their IDs
+
     @ManyToMany
     @JoinTable(
                 name = "EmployeeAttribute",
@@ -40,27 +40,10 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "ATTR_ID"))
     private List<Attribute> hasAttr;
 
-    //used to find all subordinates of a supervisor
 
+    //variable that holds self join functionality of employee to himself
     @OneToMany(mappedBy="supervisor")
     private Set<Employee> subordinates; // = new HashSet<Employee>();
-
-    //Login Credentials related attributes
-
-//    //nullable false ?
-//    @Column(name = "email")
-//    private String email;
-//
-//    //nullable false ?
-//    @Column(name = "password")
-//    private String password;
-//
-//    //nullable false ?
-//    //role is the attribute to distinguish if user
-//    //is admin or plain user
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "role")
-//    private RoleType role;
 
     public Employee() {
     }
@@ -121,6 +104,7 @@ public class Employee {
     }
 
 
+    //function to test values
 
     @Override
     public String toString() {

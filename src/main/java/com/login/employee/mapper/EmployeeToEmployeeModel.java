@@ -14,6 +14,7 @@ public class EmployeeToEmployeeModel {
 
     //assigns variables from User to User Model
     //basically DB data to plain String for web display
+
     public EmployeeModel toEmployeeModel(Employee emp){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -22,8 +23,11 @@ public class EmployeeToEmployeeModel {
 
         empModel.setId(emp.getId());
         empModel.setName(emp.getName());
-        empModel.setDateOfHire(dateTimeFormatter.format(emp.getDateOfHire())); //maybe needs formatter
-        empModel.setSupervisor(emp.getSupervisor() != null ? emp.getSupervisor().getId() : "n/a"); //check for nullability
+        empModel.setDateOfHire(dateTimeFormatter.format(emp.getDateOfHire()));
+
+        //check for nullability if null set supervisor to n/a
+
+        empModel.setSupervisor(emp.getSupervisor() != null ? emp.getSupervisor().getId() : "n/a");
 
         return empModel;
 

@@ -8,7 +8,7 @@
 
 <form class="needs-validation" action="/register" id="userForm" method="POST">
 
-<#--    row with first and last name input-->
+<#--    row with name and email -->
     <div class="row">
 
         <div class="col-md-6 mb-3">
@@ -33,7 +33,7 @@
 
     </div>
 
-    <#--    row with password-->
+    <#--    row with password and role-->
     <div class="row">
 
         <div class="col-md-6 mb-3">

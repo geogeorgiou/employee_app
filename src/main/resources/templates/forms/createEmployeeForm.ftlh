@@ -34,6 +34,8 @@
         </div>
     </div>
     <br>
+
+    <#--    error message to display when backend checks are not met-->
     <#if errMsg??>
         <div class="emsg">
             <p>

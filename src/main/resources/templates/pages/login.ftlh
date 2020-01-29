@@ -27,8 +27,6 @@
         <polyline points="21 15 16 10 5 21"></polyline>
     </svg>
 
-    <#--    login prompt-->
-<#--    <h1 class="h3 mb-3 font-weight-normal">Login</h1>-->
 
     <#--    username div with necessary name value for Security-->
     <div class="mb-3">

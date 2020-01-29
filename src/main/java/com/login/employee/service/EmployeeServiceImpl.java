@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    //AUTO GENERATED
+
     @Override
     public Employee updateEmployee(EmployeeModel empModel) throws NullPointerException,CyclicChildException {
 
@@ -62,10 +62,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee emp = optionalEmployee.get();
 
+        //function used at both edit and create employee
+
         setEmployeeVars(emp,empModel);
 
         return userRepo.save(emp);
     }
+
+    //checks if employee (empId) has supervisor (superId) as descendant
 
     public boolean existsInSubordinateSet(String empId,String superId){
         List<Employee> employeeSet = userRepo.findSubBySupervisorId(empId);
@@ -92,6 +96,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (optionalEmployee.isPresent())
             throw new NullPointerException("Employee with id={"+empId+"} already exists!");
 
+        //function used at both edit and create employee
+
         setEmployeeVars(emp,empModel);
 
         return userRepo.save(emp);
@@ -113,6 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     //code to get Employee supervisor according to different scenarios
+
     public Employee getEmployeeSupervisor(String empId,String superId) throws NullPointerException,CyclicChildException{
 
         //check for null cases (null,""," ") in superId (no supervision)
@@ -155,11 +162,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteById(String id) {
 
-        //NEEDS SOME WORK
-        //maybe refactor work to list?
-        //delete by Id deletes all Subordinates
+        //delete by Id deletes all Subordinates!
         List<Employee> employeeList = userRepo.findSubBySupervisorId(id);
 
+        //iterate and delete in reverse order so not to violate constraints
         Collections.reverse(employeeList);
 
         for (Employee emp : employeeList) {

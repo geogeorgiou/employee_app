@@ -3,7 +3,6 @@
 
 
     <div class="row">
-        <#--        no changes here i Don't want the form to be able to pass this as argument-->
         <div class="col-md-6 mb-3">
             <label for="id">Id</label>
             <input type="text" class="form-control" id="id" name="id" placeholder="Enter id" value="${employee.id}" readonly>
@@ -35,6 +34,8 @@
         <br><br><br>
     </div>
     <br>
+
+<#--    error message to display when backend checks are not met-->
     <#if errMsg??>
         <div class="emsg">
             <p>

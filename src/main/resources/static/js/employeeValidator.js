@@ -2,7 +2,7 @@
 // with jQuery checks for "rules"
 // and returns corresponding error "messages"
 
-// used in /admin/home
+// used in /admin/edit and /admin/create
 
 jQuery.validator.addMethod("lettersonly", function(value, element) {
     return this.optional(element) || /^[a-z ]+$/i.test(value);
@@ -43,6 +43,8 @@ jQuery(function ($){
             }
         });
     }
+
+    //modal to display when trying to delete employee
 
     $('#modal').on('show.bs.modal', function (event) {
         const id = event.relatedTarget.dataset.id;

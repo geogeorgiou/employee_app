@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//Controller that handles /user/home
+//Controller that handles /admin/home and /user/home
+
+//also handles the edit,create and delete employee
+
+//for simplification reasons it could be split on homecontroller (handles user)
+//and employeecontroller (handles employee)
 
 @Controller
 public class HomeController {
@@ -36,13 +41,14 @@ public class HomeController {
     private static final String LOGGED_USER_NAME = "userFirstName";
     private static final String LOGGED_USER_ROLE = "role";
 
-    //User Service
-    @Autowired
-    private EmployeeService employeeService;
 
     @Autowired
-    private LoginUserService loginService;
+    private EmployeeService employeeService; //EmployeeService
 
+    @Autowired
+    private LoginUserService loginService; //User Service
+
+    //handles /user/home
 
     @GetMapping(value = "/user/home")
     public String getUserHome(Model model) {
@@ -52,17 +58,20 @@ public class HomeController {
         LoginUser loginUser = loginResponse.getLoginUser();
         LoginUserModel userModel = loginService.findByEmail(loginUser.getEmail());
 
-        //Assign variables to model in order to show data on /user/home
-
+        //Assign variables to model in order to show data
         List<EmployeeModel> employeeModels = employeeService.findAll();
 
+        //Assign to ftl variable the model list to display on table
         model.addAttribute(EMPLOYEES_LIST, employeeModels);
 
+        //user related variables for displaying his name according to role
         model.addAttribute(LOGGED_USER_ATTR, userModel);
         model.addAttribute(LOGGED_USER_NAME, loginUser.getLogname());
         model.addAttribute(LOGGED_USER_ROLE, loginUser.getRole().name());
         return "pages/home";
     }
+
+    //handles /user/home
 
     @GetMapping(value = "/admin/home")
     public String getAdminHome(Model model){
@@ -73,6 +82,8 @@ public class HomeController {
     }
 
     //**************** EMPLOYEE CONTROLLER
+
+    //edit employee GET
 
     @GetMapping(value = "/admin/{id}/edit")
     public String getEditEmployee(@PathVariable String id,
@@ -85,6 +96,8 @@ public class HomeController {
         return "pages/editEmployee";
     }
 
+    //edit employee POST
+
     @PostMapping(value = "/admin/{id}/edit")
     public String doEditEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel,
                                  Model model) {
@@ -96,22 +109,27 @@ public class HomeController {
             //both nullpointer (cannot find supervisor) and (cyclic reference) are of identical behaviour
         } catch (NullPointerException | CyclicChildException ex){
 
-            //add to model error message for print? Doesn't show
-            System.out.println(ex.getMessage());
+            //add to model error message for print? Doesn't show on /admin/{id}/edit displays on /create
+//            System.out.println(ex.getMessage());
+
             model.addAttribute(ERR_MSG,ex.getMessage());
 
             return "redirect:/admin/{id}/edit";
 
-        } //add to model error message for print?
+        }
 
         return "redirect:/admin/home";
     }
+
+    //create employee POST
 
     @GetMapping(value = "/admin/create")
     public String getCreateEmployee(Model model){
         model.addAttribute(EMPLOYEE_ATTR, new EmployeeModel());
         return "pages/createEmployee";
     }
+
+    //create employee POST
 
     @PostMapping(value = "/admin/create")
     public String doCreateEmployee(@ModelAttribute(EMPLOYEE_ATTR) EmployeeModel employeeModel
@@ -131,6 +149,8 @@ public class HomeController {
         return "redirect:/admin/home";
     }
 
+
+    //delete employee POST
 
     @PostMapping(value = "/admin/{id}/delete")
     public String deleteEmployee(@PathVariable String id){

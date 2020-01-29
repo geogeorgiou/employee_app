@@ -20,7 +20,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
     //providing home page URLs for user and admin
     private static final String USER_HOME_PAGE_URL = "/user/home";
-    private static final String ADMIN_HOME_URL = "/admin/home"; //not used
+    private static final String ADMIN_HOME_URL = "/admin/home";
 
     //redirect strategy per case
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

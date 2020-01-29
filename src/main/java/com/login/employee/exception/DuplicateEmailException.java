@@ -1,6 +1,6 @@
 package com.login.employee.exception;
 
-//custom Exception thrown when duplicate mail found
+//custom Exception thrown when duplicate mail found when creating new admin,user
 public class DuplicateEmailException extends RuntimeException{
 
     public DuplicateEmailException() {

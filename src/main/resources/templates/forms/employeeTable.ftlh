@@ -1,3 +1,5 @@
+<#--    table to display contents if role is either admin or user-->
+
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>

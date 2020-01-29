@@ -8,6 +8,9 @@ import javax.persistence.*;
 @Table(name = "LoginUser")
 public class LoginUser {
 
+
+    //(admin,user) variables
+
     @Id
     @Column(name = "email",nullable = false)
     private String email;

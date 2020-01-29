@@ -13,7 +13,6 @@ public class Attribute {
     @Column(name = "ATTR_ID",nullable = false)
     private String id;
 
-
     @Column(name = "ATTR_Name",nullable = false)
     private String name;
 
